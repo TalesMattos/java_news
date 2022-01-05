@@ -1,0 +1,29 @@
+JSHELL --> Ferramenta para executar código java no terminal de comando
+
+
+
+PS C:\Users\tales> jshell
+|  Welcome to JShell -- Version 11.0.12
+|  For an introduction type: /help intro
+
+jshell> System.out.println("Hello World!")
+Hello World!
+
+jshell> int a = 10
+a ==> 10
+
+jshell> int b = 40
+b ==> 40
+
+jshell> a+b
+$4 ==> 50
+
+jshell> Pattern.compile("\\w[z]").matcher("hello world!").find()
+$5 ==> false
+
+jshell> Pattern.compile("\\w[ll]").matcher("hello world!").find()
+$6 ==> true
+
+jshell> /exit
+|  Goodbye
+PS C:\Users\tales>
