@@ -1,0 +1,4 @@
+- Oracle JDK passa a ser pago. (ou usar Open JDk)
+- JRE disponível separadamente (modularização da plataforma)
+- Comando 'javac' é totalmente substituído apenas por 'javac'
+- 
