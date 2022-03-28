@@ -1,0 +1,891 @@
+http://javanapratica.googlecode.com/svn-history/r65/trunk/material_didatico/dicas_certificacao/
+
+
+aula1
+
+Principais conceitos (dicas de exame)
+	Java é case-sensitive
+	Todas as palavras chave possuem somente letras  minúsculas
+	Const e goto não funcionam e geram erros de compilação
+	Java possui 50 palavras reservados sendo que duas delas geram erros de compilação
+
+	Principais conceitos (dicas de exame)
+	Um arquivo fonte pode ter somente uma classe pública
+	Se o arquivo fonte possui uma classe pública, o nome do arquivo deve ser exatamente o mesmo da classe pública.
+	Um arquivo pode conter somente uma declaração do tipo package, mas múltiplos imports;
+	Se existir a sentença package esta deve ser a primeira linha no arquivo fonte
+	As sentenças import devem vir após o package e antes da declaração da classe
+	Se não houver qualquer sentença package as sentenças import devem ser as primeiras linhas no arquivo fonte
+	As declarações de package e import se aplicam a todos os arquivos na classe
+	Um arquivo pode conter uma ou mais classes default
+	Classes que não são públicas não possuem nenhuma restrição para nomenclatura perante o arquivo
+
+Principais conceitos (dicas de exame)
+Existem 4 modificadores de acesso: public, protected, default, private
+Classes podem conter acesso public ou default
+Classes com acesso default podem ser vistas somente dentro do mesmo pacote
+Uma classe com acesso public pode ser vista por todas as classes em todos os pacotes
+	Visibilidade se restringe somente a se um código em uma classe pode:
+	Criar uma instância de outra classe
+	Herdar [extend] outra classe
+	Acessar métodos e variáveis de outra classe
+
+	Classes também podem ser marcadas com os modificadores final, abstract ou strictfp
+	Uma classe não pode ser final e abstract ao mesmo tempo
+	Uma classe final não pode ser herdada [extends]
+	Uma classe abstrata não pode ser instanciada
+	Uma classe abstrata pode conter ambos os métodos abstratos e não abstratos
+	A primeira classe concreta que herdar de uma classe abstrata deve implementar todos os seus métodos abstratos.
+
+	Principais conceitos (dicas de exame)
+	Identificadores podem começar com uma letra, _, ou caracter monetário ($)
+	Após o primeiro caracter, os identificadores podem incluir digitos	
+	Identificadores podem ser de qualquer tamanho
+	Métodos javaBeans devem ser nomeados com o uso do camelCase
+	Métodos JavaBeans devem começar com get, set, is, add ou remove
+
+	Métodos e variáveis de instância são conhecidos como membros
+	Membros podem usar 4 tipos de acesso: public, protected, default, private
+	Membros se classificam por duas formas:
+	Código em uma classe pode acessar um membro de outra classe
+	Uma subclasse pode herdar um membro de sua superclasse
+	Se uma classe não pode ser acessada, seus membros também não podem
+
+	Membros públicos podem ser acessados por todas as outras classes, mesmo em outros pacotes
+	Se um membro de uma classe é publico este será herdado, independente do pacote
+	this sempre se refere ao objeto corrente
+	Membros privados somente podem ser acessados de dentro da mesma classe
+	Como membros privados não são visíveis para nenhuma outra classe eles também não podem ser herdados
+	Membros default podem ser acessados somente por classes no mesmo pacote
+	Membros protected podem ser acessados em outros pacotes, mas, somente por herança
+	Um membro protected herdado por classe em outro pacote é acessível somente para esta classe e suas subclasses
+
+
+Principais conceitos (dicas de exame)
+Variáveis de instância podem:
+	Ter qualquer tipo de acesso
+	Serem marcadas final
+	Variáveis de instância não podem ser abstract, synchronized, native, ou strictfp
+	É permitido declarar uma variável local com o mesmo nome de uma variável de instância – Shadowing.
+Variáveis final tem as seguintes propriedades:
+	Variáveis final não podem ser reinicializadas uma vez que o valor foi atribuído.
+	Variáveis de referência final não podem referir a objetos diferentes uma vez que o objeto já foi atribuído à variável final
+	Variáveis de referencia final devem ser inicializadas antes do construtor terminar
+	Não existem objetos final. Uma referencia de um objeto marcado final não significa que o objeto em si é imutável
+
+
+
+aula2
+
+Encapsulamento ajuda a esconder/encapsular os detalhes de implementação através de uma interface
+Código encapsulado tem duas características:
+Variáveis de instância são mantidas protegidas [usualmente com o modificador private]
+Métodos getter e setter provem acesso as variáveis de instância
+Acoplamento é o grau de abertura da API para o usuário
+Acoplamento refere-se ao grau no qual uma classe sabe sobre os membros de outras classes
+Baixo acoplamento significa ter classes bem encapsuladas, minimizando as referências para outras classes
+Auto acoplamento significa ter classes que quebram as regras de baixo acoplamento
+Coesão refere-se ao grau no qual uma classe tem um simples, e bem definido papel ou responsabilidade
+Alta coesão significa ter classes cujos membros suportam um simples, bem-focado papel ou responsabilidade
+Baixo acoplamento significa ter uma classe, cujos membros suportam papéis múltiplos e não focados somente em sua responsabilidade
+
+	É-um refere-se a herança
+	É-um é expressado através da palavra chave extends
+	É-um, "herda de", e "é subtipo de " são todas expressões equivalentes/sinônimos
+
+Tem-um significa que a instância de uma classe "Tem-uma" referência para uma instância de outra classe
+
+	Polimorfismo significa muitas formas
+	Uma variável de referência é sempre de um único tipo, imutável, mas que pode se referir à um subtipo
+	Um simples objeto pode ser referenciado por variáveis de referência de muitos tipos [diferentes] desde que elas sejam do mesmo tipo ou supertipo do objeto
+	O tipo da variável de referência [não o tipo do objeto], determina quais métodos podem ser chamados.
+	Invocações de métodos por polimorfismo se aplicam somente para métodos de instância sobrescritos
+
+	Principais conceitos (dicas de exame)
+	Métodos podem ser sobrescritos ou sobrecarregados: construtores podem ser sobrecarregados, mas não sobrescritos
+	Métodos abstratos devem ser sobrescritos pela primeira subclasse concreta [não abstrata]
+	Com respeito ao método que está sendo sobrescrito, o novo método deve conter:
+	A mesma lista de argumento
+	Deve ter o mesmo tipo de retorno, exceto que no Java 5, o tipo de retorno pode ser uma subclasse - isto é chamado de retorno covariant
+	Não pode conter um modificador de acesso mais restritivo
+	Pode ter um modificador de acesso menos restritivo
+	Não deve lançar exceções checadas mais genéricas
+	Pode lançar menos exceções mais específicas, ou qualquer exceção não checada
+	Métodos final não podem ser sobrescritos
+	Somente métodos herdados podem ser sobrescritos, lembre-se que métodos private não são herdados
+	Uma subclasse pode usar super.nomeDoMetodoSobrescrito() para chamar a versão da superclasse;
+	Tipo do objeto [não o tipo da variável de referência] determina qual método sobrescrito será chamado em tempo de execução.
+
+
+	Sobrecarga significa reusar o mesmo nome do método, mas com argumentos diferentes
+	Métodos sobrecarregados devem:
+	Ter uma lista de argumentos diferentes
+	Ter diferentes tipos de retornos, se a lista de argumentos também é diferente
+	Podem ter diferentes modificadores de acesso
+	Podem lançar diferentes exceções
+	Métodos de uma superclasse podem ser sobrecarregados na subclasse
+	Polimorfismo é somente para sobrescrita, não para sobrecarga
+	Tipo da referência determina qual método sobrecarregado será usado em tempo de compilação
+
+
+Interface
+Declarando uma interface
+Implementando uma interface
+Declarando uma constante de interface
+
+Principais conceitos (dicas de exame)
+Quando você implementa uma interface, você está confirmando seu contrato
+Você implementa uma interface quando sobrescreve propriamente e concretamente todos os seus métodos
+Uma simples classe pode implementar muitas interfaces
+Interfaces são contratos para explicar o que uma classe pode fazer, mas não diz nada sobre qual maneira isso deve ser feito
+Interfaces podem ser implementadas por qualquer classe de acordo com qualquer árvore de herança
+Uma interface é como uma classe 100% abstrata, e é implicitamente abstrata mesmo que você digite o modificador abstract ou não
+Uma interface pode ter somente métodos abstratos, métodos concretos não são permitidos.
+Métodos de interface são, por padrão, públicos e abstratos - a declaração explicita destes modificadores é opcional
+Interfaces podem ter declarações de constantes, as quais são sempre, implicitamente, publicas, estáticas e final, independente da combinação
+
+Principais conceitos (dicas de exame)
+Uma classe concreta que implementa uma interface tem as seguintes responsabilidades:
+Prover implementações concretas para todos os métodos da interface
+Deve seguir as regras para sobrescrita para os métodos que ela implementa
+Não pode declarar nenhuma nova exceção checada para os métodos implementados
+Não pode declarar nenhuma exceção que seja mais genérica do que as exceções declaradas no método da interface
+Pode declarar qualquer exceção RunTime em qualquer implementação do método independente da declaração da interface
+Deve manter a assinatura exata, com permissão somente para retornos covariantes, mas não precisa declarar as exceções da interface
+A classe implementadora e a interface podem ser ambas abstratas
+Uma classe abstrata que implementa uma interface não tem que implementar todos os métodos da interface, mas a primeira classe concreta deve.
+Uma classe pode extender somente de uma classe, mas pode implementar múltiplas interfaces
+Interfaces podem herdar de uma ou mais interfaces
+Interfaces não pode herdar uma classe, nem implementar uma classe ou interface
+Quando fizer a prova, verifique se as declarações para classe e interfaces estão corretas antes de verificar qualquer outra lógica no código.
+
+Tipos de Retorno Permitidos
+Declaração de tipo de retorno
+Tipos de retorno em métodos sobrecarregados
+Sobrescrita e tipos de retorno
+Retornos covariantes
+Retornando um valor
+
+Principais conceitos (dicas de exame)
+Um array é um tipo de retorno permitido, tanto para declarar quanto para retornar um valor
+Para métodos com tipo de retorno que incluem tipos primitivos, qualquer valor que puder ser convertido implicitamente para o tipo de retorno pode ser retornado
+Nada pode ser retornado de um void, mas você pode retornar nada! É permitido que seja escrito no código fonte somente a sentença return, em qualquer método com o tipo de retorno void, somente para sair antes do método.
+Métodos com tipo de retorno de referência a objetos pode retornar um subtipo, ou seja, uma instância de uma subclasse [covariant]
+Métodos com tipo de retorno definidos como uma interface podem retornar qualquer tipo de implementador.
+
+Principais conceitos (dicas de exame)
+
+	Você não pode criar um novo objeto sem invocar o construtor
+	Cada superclasse em uma árvore de herança terá seu construtor chamado
+	Cada classe, mesmo que seja abstrata, tem ao menos um construtor
+
+Construtores devem ter o mesmo nome da classe
+Construtores não tem tipo de retorno. Se o código que você está olhando não possui tipo de retorno, e o método possui o mesmo nome da classe, é um construtor
+Construtores podem usar qualquer tipo de acesso
+O compilador criará um construtor padrão se você não criar qualquer construtor na sua classe
+O construtor padrão é um construtor sem argumentos que chama outro construtor sem argumentos
+
+	A execução de um construtor ocorre da seguinte forma:
+	O construtor chama o construtor da superclasse, que chama o construtor da sua superclasse, e continuando assim até o construtor de Object
+	O construtor de Object executa e então retorna para o construtor que o chamou, que executa e também chama o construtor que o chamou, até chegar ao construtor da instância que está sendo criada
+
+	Principais conceitos (dicas de exame)
+	A primeira sentença de cada construtor deve ser um chamado para this() ou para super()
+	O compilador adicionará um chamado ao super() se você não o fizer, a menos que você já tenha colocado uma chamada ao this()
+	Membros de instância são acessíveis somente depois que os métodos construtores são executados
+	Classes abstratas tem construtores que são chamados quando uma classe concreta é instanciada
+	Interfaces não tem construtores
+	Se a sua superclasse não tem um construtor sem argumentos, você deve criar um construtor e inserir uma chamada ao super() de acordo com os argumentos necessários
+	Construtores não são herdados, logo não podem ser sobrescritos
+	Chamadas ao this() e ao super() não podem estar no mesmo construtor. Deve ser usado somente uma delas
+	Um construtor pode ser chamado diretamente somente por outro método construtor, super() ou this()
+	Atenções com as chamadas para o this():
+	Podem aparecer somente como a primeira sentença em um construtor
+	A lista de argumentos é quem determina qual construtor sobrecarregado será chamado
+	Construtores podem chamar construtores que podem chamar construtores e por aí vai... mas é melhor que algum destes chame o super() ou a pilha [stack] irá explodir
+
+	Principais conceitos (dicas de exame)
+	Use métodos estáticos para implementar comportamentos que não são afetados pelo estado dos membros de instância
+	Use variáveis estáticas para guardar informações que são específicas da classe ao contrário de coisas específicas de instância - haverá somente uma cópia da variável estática
+	Todos os membros estáticos pertencem à classe, não á instância
+	Um método estático não pode acessar uma variável de instância diretamente
+	Use o operador "." para acessar membros estáticos, mas lembre-se que usando uma variável de referência com um "." possui o mesmo efeito que usando a classe
+
+	Métodos estáticos não podem ser sobrescritos, mas eles podem ser redefinidos
+
+
+aula3
+
+	Principais conceitos (dicas de exame)
+	Literais Integer podem ser decimal, octal ou hexadecimal
+	Literais para longs terminam em um L ou l
+	Literais float terminam em F ou f
+	Literais double terminam em um digito ou D ou d
+	Literais booleanas terminam em true ou false
+	Literais para char são caracteres únicos dentro de aspas simples 
+
+
+Operadores de Atribuição
+Atribuição Primitivos
+Conversão Primitivos
+Atribuição de números floating-point
+Atribuindo um literal muito grande
+Atribuição entre dois primitivos
+Atribuição de variáveis de referência
+Escopo de variáveis
+
+Preparatório Para Certificação Java SCJP 1.5
+Principais conceitos (dicas de exame)
+Literais inteiras são implicitamente int
+Expressões integer sempre resultam em um valor do tamanho de um int, nunca menor
+Números de ponto-flutuante são implicitamente doubles
+Diminuir o tamanho de um primitivo exclui os bits a esquerda
+Atribuições compostas executam conversão automática
+Uma variável de referência guarda os bits que são usados para se referir ao objeto
+Variáveis de referência podem se referir para subclasses do tipo declarado, mas nunca para superclasses
+Quando se cria um novo objeto, 3 coisas acontecem:
+Se cria uma variável de referência do tipo do objeto
+Se cria um novo objeto
+Se atribui o novo objeto para a variável de referência 
+
+
+Arrays [vetores]
+Declaração de um array
+Construindo arrays unidimensionais
+Construindo arrays multidimensionais
+Inicializando um array
+Inicialização em loop
+Declaração, inicialização e construção
+Construindo e inicializando um array anônimo
+Atribuições permitidas para arrays
+Arrays de primitivos
+Arrays de referências
+Arrays de referências unidimensionais
+Arrays de referências multidimensionais
+
+
+Principais conceitos (dicas de exame)
+Arrays podem conter primitivos ou objetos, mas o array é sempre um objeto
+Para se declarar um array, os colchetes podem estar a esquerda ou a direita do nome
+Não é permitido incluir o tamanho do array em sua declaração
+É obrigatório incluir-se o tamanho do array quando se cria o objeto, a menos que seja um array anônimo
+Elementos em um array não são automaticamente criados, no entanto primitivos tem seus elementos inicializados com valor default
+Você terá uma exceção NullPointerException se tentar usar um elemento do array que não se refira a um objeto real
+O índice de um array inicia em 0
+Uma exceção ArrayIndexOutOfBoundsException ocorre quando se tenta usar um índice fora do limite
+
+
+Principais conceitos (dicas de exame)
+Arrays tem uma variável chamada length cujo valor é o numero total de elementos no array
+O último índice que se pode acessar é sempre 1 - o tamanho do array
+Arrays multidimensionais são sempre arrays de arrays
+As dimensões em um array multidimensional podem ter tamanhos diferentes
+Um array de primitivo pode aceitar qualquer valor que possa ser implicitamente convertido para o tipo declarado do array
+Um array de objetos pode conter qualquer objeto que passe o teste é - um com o instanceof
+Se você atribuir um array para um tipo de referência previamente declarado, este deve conter o mesmo numero de dimensões
+É possível atribuir um array de um tipo para um referência de array previamente declarada de um dos seus supertipos
+
+
+Principais conceitos (dicas de exame)
+Quando um array de objetos é instanciado, os objetos dentro do array não são instanciados automaticamente, mas as referências possuem valor null
+Quando um array de primitivos é instanciado, aos elementos são atribuídos valores padrão
+Variáveis de instância são sempre inicializadas com o valor padrão
+Variáveis Locais/automáticas/método nunca são inicializados com o valor padrão. Se você tentar usar uma destas variáveis antes de inicializá-las, você criará um erro de compilação
+
+Passando argumentos para Métodos
+Passagem de parâmetros por valor
+Primitivos
+Referências
+Shadowing
+
+Principais conceitos (dicas de exame)
+Métodos podem receber primitivos e referências de objetos como argumentos
+Argumentos de métodos são sempre cópias
+Argumentos de métodos nunca são objetos reais, sendo sempre referências para um objeto
+Um argumento primitivo é um cópia que não possui relação com o primitivo original
+Um argumento de referência é uma outra cópia da referência do objeto original
+Shadowing ocorre quando duas variáveis, com escopos diferentes, possuem o mesmo nome
+
+Principais conceitos (dicas de exame)
+Um bloco de inicialização estático executa somente uma vez, quando a classe é carregada pela JVM
+Blocos de inicialização de instancia ocorrem todas vez que uma nova instancia é criada. Eles são executados depois de todos os super-construtores e antes do código do próprio construtor
+Se existem múltiplos blocos de inicialização em uma classe, eles seguem as regras mencionadas acima, e são executados na ordem que aparecem no arquivo fonte
+
+	Principais conceitos (dicas de exame)
+	De acordo com o Java 5, métodos podem ser declarados com listas de argumentos que aceitam de um à muitos argumentos, isto é chamado de var-args
+	Um método com var-arg somente pode conter um parâmetro var-arg
+	Em métodos com parâmetros normais e um var-arg, o var-arg deve vir em último lugar
+
+
+aula4
+
+
+	Principais conceitos (dicas de exame)
+	Uma enum especifica uma lista de constantes que podem ser atribuídas à um tipo particular
+	Uma enum não é uma String nem um int; o tipo da constante de um enum é o tipo da enum;
+	Uma enum pode ser declarada fora ou dentro de uma classe, mas nunca em um método.
+	Uma enum declarada fora da classe não deve ser marcada static, final, abstract, protected nem private
+	Enums podem conter construtores, métodos, variáveis e constantes no corpo da classe
+	Constantes enum podem enviar argumentos para o construtor enum, usando a sintaxe GRANDE(8), onde a literal 8 é passada para o construtor
+	Construtores enum podem ter argumentos, e podem ser sobrecarregados
+	Construtores enum nunca podem ser invocados diretamente no código. Eles são sempre chamados automaticamente quando uma enum é inicializada.
+	O ponto e virgula no final da declaração de uma enum é opcional. Ambos são permitidos:
+	enum Teste { TESTE1, TESTE2, TESTE3} 
+	enum Teste { TESTE1, TESTE2, TESTE3};
+
+
+Operadores Compostos
++=
+-=
+*=
+/=
+%=
+
+Preparatório Para Certificação Java SCJP 1.5
+Principais conceitos (dicas de exame)
+Casting automático
+Atribui o valor do operando do lado direito ao operando do lado esquerdo
+Facilita a realização de cálculos
+
+
+Preparatório Para Certificação Java SCJP 1.5
+Operadores Relacionais
+Operadores de igualdade
+Igualdade para primitivos
+Igualdade para variáveis de referência
+Igualdade para enums
+
+
+Preparatório Para Certificação Java SCJP 1.5
+Principais conceitos (dicas de exame)
+Operadores relacionais sempre resultam em um valor boolean (true ou false)
+Existem 6 operadores relacionais: >, >=, <, <=, ==, e !=. Os dois últimos [== e !=] são as vezes referidos como operadores de igualdade
+Quando comparando caracteres, Java usa o valor Unicode do caracter como um valor numérico
+Operadores de igualdade:
+Existem dois operadores de igualdade: == e !=.
+4 tipos de coisas podem ser testadas: números, caracteres, booleans, e variáveis de referência
+Quando comparar variáveis de referência, == retorna verdadeiro somente se ambas as referências referenciam o mesmo objeto
+Preparatório Para Certificação Java SCJP 1.5
+Comparação com instanceof
+Comparação
+Erro de compilação com instanceof
+
+
+
+Preparatório Para Certificação Java SCJP 1.5
+Principais conceitos (dicas de exame)
+instanceof serve somente para variáveis de referência, e serve para verificar se o objeto é de um tipo particular
+O operador instanceof pode ser usado somente para testar objetos (ou null) contra tipos de classes que pertencem a mesma hierarquia de classes
+Para instancias, um objeto passa o teste de instanceof somente se alguma de suas superclasses implementem a interface do lado direito do operador instanceof
+Preparatório Para Certificação Java SCJP 1.5
+Operadores Aritméticos
+Resto/Remainder
+Concatenação de String
+
+
+Preparatório Para Certificação Java SCJP 1.5
+Principais conceitos (dicas de exame)
+Existem 4 operadores matemáticos primários: adição, subtração, multiplicação e divisão
+O operador resto [remainder] % retorna o resto de uma divisão
+Expressões são avaliadas da esquerda para a direita, a não ser por regras de parênteses, ou se alguns operadores na expressão tiverem maior precedência sobre outros
+Os operadores *, /, e % possuem maior precedência sobre + e -
+Se um operador é um String, o operador + concatena os operandos
+Se ambos os operandos são numéricos, o operador + soma estes
+Preparatório Para Certificação Java SCJP 1.5
+Operadores de incremento e decremento
+Operador condicional
+Operadores lógicos
+
+
+Preparatório Para Certificação Java SCJP 1.5
+Principais conceitos (dicas de exame)
+Operadores de prefixo, executam antes do valor ser utilizado na sentença
+Operadores de sufixo, executam depois do valor ser utilizado na sentença
+Variáveis marcadas final não podem ser incrementadas ou decrementadas
+O exame cobre 6 operadores lógicos: &, |, ^, !, &&, e ||.
+Operadores lógicos trabalham somente com duas sentenças [exceto por !] que devem resultar em valores booleanos
+Os operadores && e & resultam em true somente se ambos os operandos retornarem true
+Os operadores || são conhecidos como operadores OU de abreviação
+O operador && não avalia o operando direito se o operando esquerdo é falso
+O operador || não avalia o operando direito se o operando esquerdo é falso
+O operador & e | sempre avaliam todos os operandos
+O operador ^ [OU exclusivo] retorna true somente se exatamente um operando for true
+O operador ! [chamado operador de inversão] retorna o oposto do valor boolean da sentença
+O operador ternário [condicional] retorna um dos valores desde que a condição seja true ou false
+Retorna o valor depois de ? se a expressão for verdadeira
+Retorna o valor depois de : se a expressão for falsa
+Preparatório Para Certificação Java SCJP 1.5
+Garbage Collection
+Visão geral da gerência de memória e garbage collection
+Visão geral do garbage collector
+Escrever código com legibilidade para o coletor
+
+Preparatório Para Certificação Java SCJP 1.5
+Principais conceitos (dicas de exame)
+Em Java, garbage collection [GC] prove gerencia automática de memória
+O trabalho do GC é remover os objetos que não podem ser alcançados
+Somente a JVM decide quando executar o GC, você apenas sugere isso
+Ninguém sabe identificar o algoritmo do GC com certeza
+Os objetos devem ser classificados como elegíveis para coleta, antes que eles sejam coletados
+Um objeto está elegível quando nenhuma referencia consegue alcançá-lo
+Para alcançar um objeto, você precisa ter uma referência manipulável para aquele objeto
+Aplicações Java pode ficar sem memória
+Ilhas de objetos podem ser coletadas, mesmo que uma tenha referência à outra
+Requisite o Garbage Collection" com a sentença System.gc()
+A classe Object tem um método finalize()
+O método finalize() é executado uma vez, e somente uma vez antes que o Garbage Collector colete um objeto
+O garbage Collector não faz garantias, o método finalize() pode não ser executado
+Você pode salvar um objeto de dentro do método finalize()
+
+	Classes Wrapper
+	Visão geral classe wrapper
+	Criando objetos wrapper
+	Construtores de wrappers
+	Métodos valueOf()
+	Utilizando utilitários de conversão de wrapper
+
+	Principais conceitos (dicas de exame)
+	As classes wrapper são correspondentes aos tipos primitivos
+	Wrappers tem duas funções principais:
+	Empacotar primitivos então eles podem ser manuseados como objetos
+	Fornecer métodos utilitários para primitivos (usualmente conversões)
+	Os 3 métodos mais importantes da família são:
+	xxxValue(), não precisa de argumentos e retorna um primitivo
+	parseXxx(), precisa de um String e retorna um primitivo, lança a exceção NumberFormatException
+	valueOf(), precisa de um String e retorna um objeto wrapper, lança a exceção NumberFormatException
+	O construtor do wrapper poder receber uma String ou um primitivo, exceto para Character que somente recebe um char
+	Radiação refere-se a bases, tipicamente diferentes de 10 como octal = 8 e hexadecimal = 16
+
+Boxing
+Auto boxing
+Boxing, ==, equals
+Sobrecarga
+Sobrecarga da maneira difícil – correspondência de métodos
+Sobrecarga com boxing e var-arg
+Ampliando variáveis de referencia
+Sobrecarga combinando ampliação e boxing
+
+	Principais conceitos (dicas de exame)
+	Desde o Java 5, boxing permite a você converter primitivos para wrappers ou para primitivos automaticamente
+	Usando == com wrappers é arriscado; wrappers com o mesmo valor, desde que seja menor que 127 serão iguais, valores maiores não serão iguais
+	Generalização de primitivos usa o menor método com o menor argumento possível
+
+	Usado individualmente, boxing e var-args são compatíveis com sobrecarga
+	Você não pode generalizar de um wrapper para outro tipo.
+	Você não pode generalizar e então empacotar (um int não se torna um long)
+	Você pode empacotar e então generalizar (um int pode se tornar um object, através de Integer)
+	Você pode combinar var-args com generalização ou empacotamento
+
+
+aula5
+
+	Usando break e continue
+	Sentenças sem nome [unlabelled]
+	Sentenças com nome [labelled]
+
+
+	Principais conceitos (dicas de exame)
+	Uma sentença for tem 3 partes: declaração e/ou inicialização, avaliação de um boolean, e a expressão de iteração
+	Se uma variável é incrementada ou avaliada dentro de uma repetição for ela deve ser declarada antes da repetição ou dentro da declaração
+	Uma variável declarada [não apenas inicializada] dentro de uma estrutura de repetição básica não pode ser acessada fora da repetição [em outras palavras, código abaixo da estrutura de repetição não poderá utilizar a variável]
+	você pode inicializar mais de uma variável do mesmo tipo na primeira parte da declaração do for padrão; cada inicialização deve ser separada por virgula
+	Uma sentença for enhanced [a partir do Java 5], tem duas partes, a declaração e a expressão. Isto é usado na maioria das vezes para iterar entre arrays e collections
+	Com um enhanced for, a expressão é o array ou collection através do qual você pode iterar
+
+
+Principais conceitos (dicas de exame)
+Com o enhanced for, a declaração é o bloco da variável, cujo tipo é compatível com os elementos do array ou da collection, e as variáveis contém o valor do elemento que é dado na iteração
+Você não pode usar um número ou qualquer coisa que não resulte em um boolean como condição para uma sentença if ou construtor de repetição. você não pode, por exemplo, dizer if(x) a menos que x seja uma variável boolean
+O código da repetição do while será executada pelo menos uma vez, mesmo que o teste da condição não seja satisfeita
+Uma sentença não nomeada com break fará com que a iteração corrente da repetição mais interna parar e a execução do código seguirá para a próxima estrutura de repetição
+Uma sentença nomeada fará com que a execução mais interna do loop pare, que a condição daquele loop seja checada, e se a condição for satisfeita, a estrutura de repetição executará novamente
+Se uma sentença break ou continue é nomeada, isto fará com que uma ação similar ocorra na estrutura de repetição nomeada, mas não simplesmente para o mais interno
+
+	Principais conceitos (dicas de exame)
+	Existem dois tipos de exceções: verificadas e não verificadas.
+	Exceções verificadas incluem todos os subtipos de exceções, incluindo classes que herdem de RuntimeException
+	Exceções verificadas são regidas pela regra tratar ou declarar; qualquer método que pode lançar uma exceção verificada (incluindo métodos que invocam métodos que podem lançar a exceção) devem também declarar a exceção usando throws ou tratá-la com um apropriado try/catch
+	Subtipos de error ou RuntimeException não são verificados, então o compilador não lhe forçará a usar a regra de tratar ou declarar. Você está livre pra tratá-los ou para declará-los, mas o compilador não se importa se você está fazendo isso ou não.
+
+	Principais conceitos (dicas de exame)
+	A única exceção pela qual a regra "finally sempre será chamado" é que o finally não será chamado se a JVM desligar. Isto pode acontecer se o código de um bloco try/catch chamar System.exit()
+	Se você usar um bloco finally opcionalmente, ele sempre será invocado, não importando se a execução no try correspondente será lançada ou não, e sem se importar se a exceção lançada é apanhada ou não
+	Apenas porque finally é invocado não significa que ele terminará. Código no bloco finally pode também lançar uma exceção ou chamar System.exit()
+	Exceções não apanhadas propagam através da pilha de chamadas, iniciando do método onde a exceção é lançada e terminando com o primeiro método que tem o catch correspondente para esta exceção ou a JVM desligar, o que acontece se a exceção chegar até o main e este declará-la e não tratá-la
+	Você pode criar suas próprias exceções, apenas herdando de Exception ou um de seus subtipos. Sua exceção será considerada verificada e você será forçado a utilizar a regra de declarar ou tratar
+	Todos os blocos catch devem estar ordenados com as exceções mais específicas para as mais genéricas. Caso contrário será criado um erro de compilação, informado-lhe que aquela exceção nunca poderá ser alcançada.
+	Alguma exceções são criadas por programadores, outras pela JVM.
+
+
+aula6
+
+	Principais conceitos (dicas de exame)
+	Strings são objetos imutáveis, mas as referências a eles não são
+	Se você criar uma nova String sem atribui - lá a uma referência, ela estará perdida para seu programa
+	Se você redirecionar uma referencia de uma String para uma nova String, a antiga estará perdida
+	Métodos String usa índices baseados em 0, exceto pelo segundo argumento de substring()
+	A classe String é final e seus métodos não pode ser sobrescritos
+	Quando a JVM encontra uma literal String, ela adiciona isso á um pool de literais String
+	Strings tem métodos: lenght(), arrays tem um atributo nomeado lenght
+	Métodos String para se lembrar: charAt(), concat(), equalsIgnoreCase(), lenght(), replace(), substring(), toLowerCase(), toString(), 
+	toUpperCase() e trim()
+
+
+	Principais conceitos (dicas de exame)
+	A API StringBuffer é a mesma que a nova correspondente StringBuilder, exceto que os métodos de StringBuilder não são sincronizados para segurança de threads
+	Os métodos StringBuilder executam com maior velocidade que os mesmos de StringBuffer
+	Todas as sentenças abaixo aplicam-se para StringBuffer e StringBuilder:
+	Eles são objetos multáveis, pode-se mudar o valor sem precisar criar um novo objeto
+	Métodos StringBuffer agem no objeto que for invocado, e os objetos podem mudar sem uma atribuição explicita na sentença
+	O método equals() não é sobrescrito, ele não compara valores
+	Lembre-se que métodos aninhados são executados da esquerda para a direita
+	Métodos StringBuffer para se lembrar: append(), delete(), insert(), reverse(), toString()
+
+Principais conceitos (dicas de exame)
+As classes que você precisa entender em java.io são File, FileReader, BufferedReader, FileWriter, BufferedWriter e PrintWriter
+Um novo objeto File não significa que existe um novo arquivo no seu disco
+Objetos File podem representar tanto um arquivo quanto um diretório
+A classe File deixa você gerenciar (add, rename e delete) arquivos e diretórios
+Os métodos createNewFile() e mkDir() adicionam arquivos para o seu sistema de arquivos
+FileWriter e FileReader são classes de baixo nível. Você pode usá-las para escrever e ler arquivos, mas geralmente elas trabalharão empacotadas
+Classes no pacote java.io são desenvolvidas para serem aninhadas ou empacotadas.
+É bem comum empacotar um BufferedReader em volta de um FileReader, para obter acesso a métodos de nível mais alto
+É bem comum empacotar um BufferedWriter em volta de um FileWriter, para obter acesso a métodos de nível mais alto
+PrintWriters podem ser usados para empacotar outros writers, mas a partir de Java 5 você pode construir diretamente de arquivos e Strings
+PrintWriters em Java 5 possuem os novos métodos append(), format(), e printf().
+Preparatório Para Certificação Java SCJP 1.5
+Serialização
+ObjectOutputStream e ObjectInputStream
+Grafos de Objetos
+Métodos writeObject e readObject
+Como herança afeta a serialização
+Serialização não é para estáticos
+Variáveis transient
+
+Preparatório Para Certificação Java SCJP 1.5
+Principais conceitos (dicas de exame)
+As classes que você precisa entender estão todas no pacote java.io; nisto se inclui: ObjectOutputStream e ObjectInputStream primariamente, FileOutputStream e FileInputStream porque você irá usá-las para criar os fluxos de baixo nível que ObjectOutputStream e ObjectInputStream usarão
+Uma classe deve implementar a interface Serializable antes que seus objetos possam ser serializados
+O método ObjectOutputStream.writeObject() serializa objetos, e o ObjectInputStream.readObject() deserializa objetos
+Se você marcar uma variável de instancia como transient, ela não será serializada mesmo que o resto do objeto seja
+Você pode melhorar o processo de serialização automático de uma classe implementando os métodos writeObject() e readObject(). Se você fizer isso, chamadas interiores para defaultWriteObject() e defaultReadObject(), respectivamente, tratarão parte da serialização que ocorre normalmente
+Se uma superclasses implementar Serializable suas subclasses o farão automaticamente
+se uma superclasse não implementar Serializable, então quando um objeto de uma subclasse for deserializado, o construtor do super não será executado
+DataInputStream e DataOutputStream não estão atualmente no exame, não importa o que os objetivos da Sun dizem
+Preparatório Para Certificação Java SCJP 1.5
+Datas, números e moedas
+A classe Date
+A classe Calendar
+A classe DateFormat
+A classe Locale
+A classe NumberFormat
+
+
+Principais conceitos (dicas de exame)
+As classes que você precisa entender são java.util.Date, java.util.Calendar, java.text.DateFormat, java.text.NumberFormat, java.util.Locale
+A maioria dos métodos da classe Date tornaram-se obsoletos
+Uma Date é armazenada como um long, utiliza como base o número de milisegundos desde 1 de janeiro de 1970
+Objetos Date são utilizados por Calendar e Locale
+O Calendar prove um poderoso conjunto de métodos para manipular datas, realizando tarefas como obter os dias da semana, ou adicionar meses ou anos para a data
+Crie instancias de Calendar usando um método factory getInstance()
+Os métodos de Calendar que você deve entender são add(), que permite adicionar ou subtrair várias informações (minutos, dias, anos, etc..) às datas, e roll(), que trabalha de uma maneira similar à add() mas não incrementa toda a data
+Preparatório Para Certificação Java SCJP 1.5
+Principais conceitos (dicas de exame)
+Instancias de DateFormat são criadas usando métodos factory estáticos getInstance() e getDateInstance()
+Existem vários formatos para datas disponíveis na classe DateFormat
+Estilos DateFormat podem ser aplicados à vários Locales para criar um amplo conjunto de resultados para qualquer data formatada.
+O método DateFormat.format() é usado para criar Strings contendo as datas propriamente formatadas
+A classe Locale é usada em conjunto com DateFormat e NumberFormat
+Ambos os objetos DateFormat e NumberFormat podem ser construídos com um específico e imutável Locale
+Para o exame você deve saber como criar Locales usando linguagem ou combinação de Linguagem e país
+Preparatório Para Certificação Java SCJP 1.5
+Analisando, Desmembrando e Formatando
+Tutoriais de pesquisa
+Pesquisa usando metacaracteres
+Pesquisa usando quantificadores
+O ponto pré-definido
+Quantificadores greedy
+Quando metacaracteres e Strings colidem
+Localizando informações por análise de padrão / Pattern matching
+Pesquisa usando a classe Scanner
+Desmembramento/Tokenizing
+
+Preparatório Para Certificação Java SCJP 1.5
+Principais conceitos (dicas de exame)
+Regex é uma abreviação para Regular Expressions, que são padrões para busca de informações
+Regex é uma sublinguagem que existe em Java e em outras linguagens também
+Regex o deixa criar padrões de busca usando caracteres literais ou metacaracteres. Metacaracteres permitem buscar por informações em âmbito mais abstrato como dígitos ou espaços em branco.
+Estude os metacaracteres \d, \a, \w e "."
+Regex prove busca em quantificadores que permitem usar conceitos como: busque por 1 ou mais dígitos em uma linha
+Estude o ?, *, e + que são quantificadores greedy
+Lembre-se que metacaracteres e Strings não se misturam muito bem, a menos que se lembre de informá-los corretamente
+Preparatório Para Certificação Java SCJP 1.5
+Principais conceitos (dicas de exame)
+As classes Pattern e Matcher provem a mais poderosa ferramenta de busca Regex em Java
+Você deve entender os métodos Pattern.compile() e o Matcher.matcher(), pattern(), find(), start(), e group()
+Você não precisará entender os métodos de substituição de Matcher
+Você pode usar o java.util.Scanner para simples buscas regex, mas isto foi primariamente inventado para desmembramento
+Desmembramento é o processo de dividir informações de acordo com delimitadores
+Em desmembramento, a informação que você recebe são chamadas tokens, e as Strings que separam os tokens são chamados delimitadores
+Desmembramento pode ser feito com a classe Scanner ou com String.split()
+Delimitadores são simples caracteres como virgulas ou expressões regex complexas
+A classe Scanner lhe permite desmembrar Strings, fluxos de dados ou arquivos.
+A classe Scanner permite desmembrar informações de dentro de uma repetição, o que lhe permite parar quando você quiser
+O método String.split() desmembra uma fonte de dados de uma vez só, por outro lado grandes quantidades de informação podem demorar para processar
+Preparatório Para Certificação Java SCJP 1.5
+Formatando
+printf()
+format()
+
+Principais conceitos (dicas de exame)
+Existem 2 métodos novos no Java 5 usados para formatar as informações de saída. Estes métodos são format() e printf(). Estes métodos são encontrados na classe PrintStream, uma instancia pode ser encontrada em System.out
+Os métodos format() e printf() tem a mesma funcionalidade
+A formatação com printf() ou format() é realizada usando strings formatadoras, que são associadas a argumentos primitivos ou String
+O método format() permite misturar literais com as suas Strings de formatação
+Os valores String formatadores que você deve conhecer são:
+Flags: -, +, 0, ",", e (
+Conversores: b, c, d, f e s
+Se seu caractere de conversão não combinar com o tipo do argumento, será lançada uma exceção
+
+
+aula7
+
+
+Equals
+Sobrescrevendo Equals
+O contrato Equals
+Reflexivo: x.equals(x) é verdade
+Simétrico: se x.equals(y) é verdade, então y.equals(x) deve ser verdade
+Transitivo: se x.equals(y) é verdade, e y.equals(z) também é, então z.equals(x) é verdade
+Consistente: Múltiplas chamadas para x.equals(y) retornarão o mesmo resultado
+Nulo: se x não é null, então x.equals(null) também é falso
+
+
+Preparatório Para Certificação Java SCJP 1.5
+Principais conceitos (dicas de exame)
+equals(), hashCode(), e toString() são públicos.
+Use == para determinar se duas referencias apontam para o mesmo objeto
+Use equals() para determinar se duas referencias são significativamente equivalentes
+Se você não sobrescrever equals, seus objetos não serão úteis como hash keys
+Se você não sobrescrever equals, objetos diferentes não podem ser considerados equivalentes
+Strings e wrappers sobrescrevem equals e são boas hashkeys
+Quando sobrescrever equals, use o operador instanceof para ter certeza que você está avaliando a classe apropriada
+Quando sobrescrever equals, compare os atributos significantes para cada objeto
+Pontos importantes do contrato equals:
+Reflexivo: x.equals(x) tem que ser verdade
+Simétrico: se x.equals(y) é verdade, então y.equals(x) deve ser verdade
+Transitivo: se x.equals(y) é verdade, e y.equals(z) também é, então z.equals(x) é verdade
+Consistente: Múltiplas chamadas para x.equals(y) retornarão o mesmo resultado
+Nulo: se x não é null, então x.equals(null) também é falso
+Preparatório Para Certificação Java SCJP 1.5
+hashCode
+Sobrescrevendo hashCode
+O contrato hashCode
+Consistente: Múltiplas chamadas para x.hashCode() retornam o mesmo integer
+Se x.equals(y) é verdade, x.hashCode() == y.hashCode() deve ser verdade
+Se x.equals(y) é falso, então x.hashCode() == y.hashCode() pode ser verdadeiro ou falso, mas se for verdadeiro será mais eficiente
+Variáveis transient não são apropriadas para equals ou hashCode
+
+
+Preparatório Para Certificação Java SCJP 1.5
+Principais conceitos (dicas de exame)
+Se x.equals(y) é verdade, então x.hashCode() == y.hashCode() também é verdade
+Se você sobrescrever equals(), sobrescreva hashCode também
+HashMap, HashSet, Hashtable, LinkedHashMap, e LinkedHashSet usam hashing
+Um hashCode apropriado sobrescreve de acordo com  contrato hashCode
+Um hashCode eficiente distribui as chaves apropriadamente através dos buckets
+Um equals() sobrescrito deve ser no mínimo tão preciso quando seu hashCode
+Para reiterar: se dois objetos são iguais, seus hashCodes devem ser iguais
+É permitido para um método hashCode retornar o mesmo valor para todas as instancias (embora isto seja ineficiente)
+Pontos importantes do contrato hashCode:
+Consistente:Múltiplas chamadas para x.hashCode() retornam o mesmo integer
+Se x.equals(y) é verdade, x.hashCode() == y.hashCode() deve ser verdade
+Se x.equals(y) é falso, então x.hashCode() == y.hashCode() pode ser verdadeiro ou falso, mas se for verdadeiro será mais eficiente
+Variáveis transient não são apropriadas para equals ou hashCode
+Preparatório Para Certificação Java SCJP 1.5
+Coleções [Collections]
+Interfaces e coleções chave do framework
+Ordenação e classificação
+	Interface list
+Interface set
+Interface map
+Interface queue
+
+Preparatório Para Certificação Java SCJP 1.5
+Coleções [Collections]
+
+Preparatório Para Certificação Java SCJP 1.5
+Principais conceitos (dicas de exame)
+Atividades comuns para collections incluem adicionar objetos, remover objetos, verificar a inclusão de um objeto, retornar os objetos, e percorrer entre eles
+Existem 3 significados para collection:
+Collections representa a estrutura da informação na qual os objetos são armazenados
+A interface java.util.Collection da qual Set e List herdam
+A classe Collecions que possui métodos estáticos utilitários para collections
+Os quatro modelos principais para collections incluem Lists, Sets, Maps, Queues
+	List são listas de coisa ordenadas, com duplicações permitidas e com um índice
+Conjuntos Set podem ou não serem ordenados e classificados; não é permitido duplicações
+Mapas de coisas com chaves, Maps, podem ou não serem ordenados e classificados, mas chaves duplicadas não são permitidas
+Queues de coisas podem processar ordenadamente por FIFO ou por prioridade
+Existem quatro subtipos de collections, classificados e não classificados, ordenados e não ordenados
+Ordenação permite percorrer através da collection em um modo específico não aleatório
+Classificação permite percorrer através de uma collection em ordem de classificação
+Classificação pode ser alfabética, numérica ou como for definida pelo programador
+Preparatório Para Certificação Java SCJP 1.5
+Usando o framework Collections
+Usando List
+Usando Set
+Usando Map
+Usando PriorityQueue
+Classificando com o comparator
+Pesquisando arrays e objetos
+Convertendo entre listas e arrays
+
+	ArrayList: Rápida iteração e acesso aleatório
+	Vector: É como uma ArrayList mais lenta, pois possui métodos sincronizados
+	LinkedList: Bom para adicionar elementos ao final, como pilhas e filas
+	PriorityQueue: Uma lista de tarefas, ordenadas por prioridade dos elementos
+
+HashSet: Acesso rápido, garante que não haja duplicidade sem ordenação
+LinkedHashSet: Sem duplicidade: iteração por ordem de inserção
+TreeSet: Sem duplicação: iteração em ordem de classificação
+HashMap: Alterações mais rápidas (pares de chave e valor); permite uma chave nula e muitos valores nulos
+Hashtable: Como um HashMap mais lento [possui métodos sincronizados]. Não permite chaves nem valores nulos
+LinkedHashMap: Iteração rápida e por ordem de inserção ou do último acessado; permite uma chave nula e muitos valores nulos
+TreeMap: Um map classificado
+Collections guardam somente objetos, mas primitivos podem ser convertidos
+Percorra com o enhanced for ou com um iterador através do hasNext() e next()
+hasNext() determina se um ou mais elementos existem, mas o iterador não se move
+next() retorna o próximo elemento e move o iterador para frente
+Preparatório Para Certificação Java SCJP 1.5
+Principais conceitos (dicas de exame)
+Para uma chave para um Map funcionar corretamente você deve sobrescrever equals() e hashCode()
+Queues usam offer() para adicionar um elemento, poll() para remover um elemento da cabeça e peek() para olhar para a cabeça da pilha
+Classificação pode ser em ordem natural, ou através de Comparable ou muitos Comparators
+Implemente Comparable usando compareTo(); prove somente um tipo de ordenação
+Crie muitos Comparators para classificar uma classe de muitas maneiras diferentes; implemente compare()
+Para os elementos serem classificáveis e procuráveis, os elementos devem ser comparáveis
+Para efetuar uma busca, um array ou list deve primeiro ser classificado
+Classes utilitárias; Collections e Arrays fornecem:
+um método sort() para classificar usando um Comparator ou ordem natural
+O método binarySearch() busca por um array ou lista pré-classificada
+Arrays.asList() cria uma lista de um array e através da mesma referencia
+Collections.reverse() inverte a ordem dos elementos na lista
+Collections.reverseOrder() retorna um Comparator que classifica na ordem invertida
+Lists e Sets tem um método toArray() para criar arrays
+
+	Principais conceitos (dicas de exame)
+	Generics deixa você reforçar segurança em tempo de compilação em Collections ou outras classes e métodos declarados usando generics
+	Um ArrayList<Animal> pode aceitar referencias de um tipo Cao, Gato, ou qualquer outro tipo de animal, desde que herde de animal ou implemente esta interface
+	Quando usar coleções genéricas, as conversões não são necessárias para obter-se o tipo declarado dos elementos.
+	Se lembre que compila sem erros e compila sem avisos é diferente
+	Atribuições polimorficas se aplicam somente para o tipo base, não para tipos genéricos em parâmetros. Você pode fazer:
+	List<Animal> aList = new ArrayList<Animal>();
+	Você não pode fazer:
+	List<Animal> aList = new ArrayList<Cao>();
+	As regras de atribuições polimorficas se aplicam em todo lugar onde uma atribuição possa ser feita. O seguinte não é permitido: 
+	void foo(List<Animal> aList) { } // não pode receber uma lista do tipo List<Cao>
+	List<Animal> bar() { } // não pode retornar uma lista do tipo List<Cao>
+	A sintaxe Wildcard permite que um método genérico aceite subtipos ou supertipos do tipo original declarado no argumento:
+	void addD(List<Cao> d) {} // pode aceitar somente <Cao>
+	void addD(List<? extends Cao>) {} // pode aceitar <Cao> ou <PitBull>
+
+
+	A palavra reservada extends é usada para demonstrar que ou extends ou implements é permitido
+	Então em <? extends Cao>, Cao pode ser uma classe ou interface
+	Quando usar um wildcard, uma List<? extends Cao>, a collection pode ser acessada mas não modificada
+	Quando usar um wildcard, List<?> qualquer tipo de genérico pode ser atribuído para a referencia mas somente para acesso, sem modificações
+	List<Object> refere-se somente para a lista List<Object>, enquanto List<?> ou List <? extends Object> pode guardar qualquer tipo de objeto, mas somente para acesso.
+	Convenções para declarações para generics usam T para tipo e E para elemento:
+	public interface List<E>
+	boolean add(E o)
+	O identificador de tipo genérico pode ser usado em declarações de classes, métodos ou variáveis
+	class Foo<t> { }
+	T anInstance;
+	Foo(T aRef) {}
+	void bar(T aRef) {}
+	T baz() {}
+	O compilador substituirá o tipo atual
+	Você pode usar mais que um tipo parametrizado em uma declaração:
+	public class UsarDois<T, X> { }
+	Você pode declarar um método genérico usando um tipo não definido na classe:
+	public <T> void getList(T t) { }
+	E isto não está usando T como um tipo de retorno, pois o tipo de retorno é void, mas para usar o T como argumento você deve declarar o seu tipo antes do tipo de retorno do método
+
+
+	Tipos Genéricos
+	O jeito legado de se fazer generics
+	Generics e código legado
+	Misturando código não genérico
+	Você pode passar uma collection genérica em um método que aceita um argumento do tipo não genérico, mas os resultados podem ser desastrosos. O compilador não pode parar o método de inserir o tipo incorreto na collection
+	Se o compilador notar que um código não seguro está pondo em perigo um tipo seguro [generic] você receberá uma aviso do compilador. Por exemplo, se você utilizar o método add() em uma lista você terá o aviso "unsafe operation"
+	Tipo de informação genérica não existe em tempo de execução, serve apenas para segurança em tempo de compilação. Misturar generics com código legado pode gerar um código que lance exceções do tipo runtime
+
+
+aula8
+
+Preparatório para Certificação Java SCJP 1.5
+Célio Batista da Silva
+Aula 8
+Preparatório Para Certificação Java SCJP 1.5
+Classes internas [Inner Class]
+Classes internas em métodos locais
+Classes internas e anônimas
+Classes internas, anônimas, definidas em argumentos
+Classes aninhadas e estáticas
+Preparatório Para Certificação Java SCJP 1.5
+Classes Internas [Inner Class]
+Codificação
+Referenciando a instância inner ou outter dentro de uma classe interna
+Modificadores de membros aplicados para classes inner
+
+Preparatório Para Certificação Java SCJP 1.5
+Principais conceitos (dicas de exame)
+Uma classe comum interna é declarada dentro das chaves de outra classe, mas fora de qualquer método ou outro bloco de código
+Uma classe interna é um membro completo da outra classe, podendo assim ser marcada com os modificadores de acesso tanto quanto os modificadores abstract ou  final.
+Uma classe interna compartilha de uma relacionamento especial com a instancia da classe externa. Este relacionamento da classe interna garante acesso a todos os membros da classe externa, incluindo aqueles marcados private
+Para instanciar uma classe interna, você deve ter uma referencia para uma instancia da classe externa
+Do código dentro da classe externa, você pode instanciar objetos da classe interna usando somente o nome da classe interna:
+MyInner mi = new MyInner();
+Do código do lado de fora da classe externa, você pode instanciar um objeto da classe interna somente usando ambos os nomes da classe interna e da classe externa e uma referencia para a classe externa como:
+MyOuter mo = new MyOuter();
+MyOuter.MyInner inner = mo.new MyInner();
+De dentro da classe interna, a palavra reservada this aponta para uma instancia da classe interna. Para referenciar os atributos da classe externa coloque a palavra reservada this usando a classe externa: MyOuter.this;
+Preparatório Para Certificação Java SCJP 1.5
+Classes internas em métodos locais
+O que pode ser feito
+O que não pode ser feito
+
+Preparatório Para Certificação Java SCJP 1.5
+Principais conceitos (dicas de exame)
+Uma classe interna definida em um método deve ser definida dentro do método da classe externa
+Para utilizar uma classe interna de métodos, você deve instancia-la, e a instanciação deve acontecer dentro do mesmo método, mas depois da definição da classe
+Uma classe interna de método não pode usar variáveis declaradas dentro do próprio método a menos que estas variáveis sejam marcadas final
+Os únicos modificadores que podem ser aplicados para classes internas de métodos são abstract e final
+Preparatório Para Certificação Java SCJP 1.5
+Classes internas anônimas
+Modelo um
+Modelo dois
+Definidas em argumentos
+
+Preparatório Para Certificação Java SCJP 1.5
+Principais conceitos (dicas de exame)
+Classes internas anônimas não tem nome, e seu tipo deve ser uma subclasse de uma classe comum ou uma implementação de uma interface comum.
+Uma classe interna anônima é sempre criada como parte de uma sentença; não se esqueça de fechar a sentença depois de definir a classe com uma chave. Isto é um caso de raro em Java, uma chave seguida por um ponto e virgula
+Por causa do polimorfismo, os únicos métodos que podem ser chamados dentro em uma referencia a uma classe interna são aqueles declarados na variável de referencia.
+Uma classe interna anônima pode herdar de uma classe ou implementar uma interface.
+Uma classe interna de argumento é declarada, definida e automaticamente instanciada como parte da invocação do método. A chave para se lembrar é que a classe está sendo definida dentro do argumento do método, então a sintaxe terminará a definição da classe em uma chave, seguido por um parênteses para terminar a chamada ao método, seguido por um ponto e virgula para terminar a sentença });
+Preparatório Para Certificação Java SCJP 1.5
+Classes estáticas aninhadas
+Instanciando
+Usando
+
+Preparatório Para Certificação Java SCJP 1.5
+Principais conceitos (dicas de exame)
+Classes aninhadas estáticas são marcadas com o modificador static
+Uma classe aninhada estática não é uma inner class, é uma classe aninhada de alto nível
+Porque a classe aninhada é estática, ela não pode compartilhar nenhum relacionamento com a instancia externa. Em fato, você não precisa de uma instancia do classe externa para instanciar uma classe aninhada estática interna
+Instanciar uma classe aninhada estática requer que você usa ambos os nomes das classes externas e estática.
+BigOuter.Nested n = new BigOuter.Nested();
+Uma classe aninhada estática interna não pode acessar membros não estáticos do classe externa, desde que ela não tenha uma referencia implícita para uma instancia da classe externa.
+
+

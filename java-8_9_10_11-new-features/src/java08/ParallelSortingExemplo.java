@@ -6,7 +6,7 @@ public class ParallelSortingExemplo {
 
 	public static void main(String[] args) {
 		
-		int[] meu_array = {5, 8, 1, 0, 6, 9, 50, -3};
+		int[] meu_array = {5, 8, 1, 0, 9, 6, 50, -3};
 		
 		for(int i : meu_array) {
 			System.out.print(i + " ");

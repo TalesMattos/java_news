@@ -1,0 +1,930 @@
+aula1
+
+1 Declarations and Access Control
+
+
+Java é case-sensitive e o padrão Java Beans adota o formato camelCase.
+PADRÃO JAVA BEANS:
+-Classes devem ser nomeados com SUBSTANTIVOS (Dog/Cachorro ; Account/Conta ; PrintWriter/Impressora)
+-Interfaces devem ser nomeados com ADJETIVOS (Serializable/Serializavel ; Runnable/Executavel)
+-Métodos devem ser nomeados com pares VERBO-SUBSTANTIVO [vervo no infinitivo] (getBalace/obterBalanco ; doCalculation/fazerCalculo ; setCustomerName/definirNomeDoCliente)
+-Variáveis devem ter nomes curtos e significativos (buttonWidth/larguraDoBotao ; accountBalance/balancoDaConta ; myString/minhaString)
+-Constantes são criadas marcando-se as variáveis como static e final. Devem ter letras maiúsculas separando cada palavra por underscore (MIN_HEIGHT/ALTURA_MINIMA)
+
+DECLARAR CLASSES
+-O arquivo .java deve ter o mesmo nome da declaração de classe publica dentro do arquivo
+-Classes podem ter os modificadores de acesso 'public' ou default(visibilidade apenas no pacote. Não se declara nenhum modificador para dafault)
+-Uma classe publica pode ser acessada de qualquer lugar da aplicação
+-Um classe com modificadro default(não se escreve nada) só pode ser acessada por outra classe que estaja no mesmo pacote
+-Se estiver tentando usar uma classe publica que está em outro pacote, é necessário declarar o import dessa classe. Se estiver no mesmo pacote não precisa do import
+-Existem 3 modificadores de classe que podem ser usados aliados aos modificadores de acesso em qualquer parte da classe: final, abstract e strictfp
+-Pode combinar final e strictfp mas não final e abstract
+-Sobre strictfp só é preciso saber que é uma palavra-chave e que pode ser usada para modificar uma classe ou um método, mas nunca uma variável
+-Strictfp indica que a classe ou metodo se conformara as regras do padrao IEEE 754 para pontos flutuantes. [não é importante]
+-Marcar uma classe com o modificador de classe 'final' significa dizer que nenhuma classe pode herdar dela (ou estender dela)
+-Caso seu código seja completamente dependente da implementação de certos métodos, marcar com final garantira que ninguem irá sobrescreve-lo
+-Uma classe marcada com 'abstract' não pode ser instanciada nunca
+-Se um método for marcado como abstract entao a classe também deverá ser marcada com abstract
+-Um classe marcada com abstract não necessáriamente deverá ter métodos marcados com o modificador abstract
+-Uma classe abstract pode ter metodos final
+-Programar com tipos de classes abtratas, incluindo interface, permitirá tirar vantagem do polimorfismo, dando maior flexibilidade e extensibilidade ao desenvolvimento
+-Uma classe que implementa uma interface não deve declarar nenhma exceção nova do método de implementação ou uma exceção que seja mais abranjente
+-Uma classe que implementa uma interface pode declarar exceções de tempo de execução em qualquer implementação de método da interface, independente do que constar na declaração da interface
+-Não precisa declarar as exeções da interface
+-Deve manter a assinatura e o tipo exato de retorno (são permitidos retornos covariante)
+-Uma classe que é abstract e implementa uma interface não precisa implementar os métodos dela, mas a primeira subclasse concreta precisa
+
+DECLARAR INTERFACES
+-Uma interface é um contrato
+-Todos os métodos de uma interface são publicos e abstratos, mesmo que não esteja declarado explicitamente
+-Toda interface implicitamente possui o modificador abstract, podendo ser declarado explicitamente
+-Uma interface é uma classe 100% abstrata
+-Todas as variaveis definidas em uma interface devem ser public satic final, ou seja uma constante, mas nao é preciso declarar, ja esta implicito
+-Os métodos de interfaces não podem ser static, nem serem marcados como final, native, strictfp ou synchronized
+-Um interface pode estender de outras interfaces
+
+DECLARAR MEMBROS DE CLASSE
+-Métodos e variáveis (membros de classe) podem receber os modificadores: private, default(nada), protected e public
+-Há três modificadores de acesso: public, protected e private
+-Há quatro níveis de acesso: public, protected, default e private
+-Uma subclasse de outro pacote só pode ver um membro protected atraves de herança, ou seja, só pode accessar o membro protected dentro dela mesmo
+-Não é possível para um subclasse que herda de uma superclasse que está em outro pacote, acessar por meio do operador . um membro protected da superclasse com uma referncia da superclasse. 
+Isso porque, um membro protected só pode ser acessado por herança, quando sua referencia estiver em uma classe de outro pacote. 
+Quanto se refere a acessar apenas por herança, quer dizer que só pode acessar o membro pretected da classe pai se for por dentro da classe filha 
+-Subclasses de fora do pacote não podem usar uma referencia à superclasse para acessar um membro protected
+-Para uma subclasse de fora do pacote, o membro protect só pode ser acessado através da herança
+-Quando uma subclasse de fora do pacote herda um membro protected, esse membro torna-se essencialmente private dentro da subclasse, de forma tal que apenas subclasse e as suas subclasses podem, acesssá-lo
+-Os membros padrão ficam visíveis para as subclasses apenas se elas estiverem no mesmo pacote que a superclasse. Ou para outras classes do mesmo pacote
+
+VARIÁVEIS LOCAIS E MODIFICADORES DE ACESSO
+-O único modificador que pode ser aplicado a uma variável local é o 'final'
+
+MODIFICADORES NÃO-REFERENTES A ACESSO
+-O modificador final, em um método, impede que ele seja sobrescrito em uma subclasse
+-O modificador final, em uma classe, impede que ela seja estendida
+-O modificar abstract não pode nunca ser combinado com o modificador static ou strictfp
+-O modificador synchronized só pode ser aplicado em métodos ou blocos de códigos
+-O modificador native indica que o método está sendo implementado conforme a plataforma, geralmente em C
+-O modificador native só pode ser usado em métodos
+-Assim como métodos marcarcados com abstract, os metodos native não tem corpo, terminam com ';' indicando que a implementacao foi omitida
+-O modificador strictfp pode ser aplicato tanto em classes como em métodos
+-strictfp força os ponto flutuantes(e quaisquer operações com pontos flutuantes) a aderirem ao padrão IEEE 754
+-Com strictfp é possível prever como os seus pontos flutuantes vão se comportar, independente da plataforma subjacente na qual a JVM está rodando
+-O incoveniente do strictfp é que se a plataforma subjacente na qual a JVM está rodando for capaz de se suportar uma maior precisão, um método que usa strictfp não poderá se beneficiar dessa capacidade
+-Argumento: aquilo que é especificado entre parentêses quando está invocando um método
+-Parâmetro: Aquilo na assinatura do método indica o que o método deve receber quando for invocado
+-var-args: só pode um tipo var-args por método
+-var-args: deve ser o último parâmetro do método
+-var-args: a sintaxe deve ser o tipo primitivo ou objeto seguido por ..., um espaço em branco e depois o nome do array que irá armazenar os parâmetro recebidos
+-var-args: é válido ter outros parêmetros num metodo que use var-args na assinatura
+
+DECLARAÇÃO DE CONSTRUTORES
+-Construtor jamais deve ter um tipo de retorno
+-Um construtor tem o mesmo nome da classe
+-Construtores não podem ser marcados com final, abstract ou static
+
+DECLARAÇÕES DE VARIÁVEIS
+-Primitivos(8 tipos diferentes): boolean, char(Um caracter Unicode de 26 bits), byte(8 bits), short(16 bits), int(32 bits), long(64 bits), float(32 bits pf) double(64 bits pf) 
+-Variáveis podem ser declaradas como variáveis de classe (static), de instância, parâmetro de método ou local
+-É possível declarar mais de uma variável na mesma linha se ela for do mesmo tipo, seja ela primitiva ou de referência;
+-Os intervalo de valores de um tipo são assinalados, ou seja, possui valores negativos e positivos no intervalo
+-O bit da esquerda, o mais significativo, serve para dizer se o valor é negativo ou positivo
+-0 significa positivo e 1 negativo, os outros bits diz respeito ao valor
+-A faixa de valores positivos tem um valor a menos do que a faixa de valores negativos, isso por que o valor 0 é armazenado como um número binário positivo
+-1 byte = 8 bits, isso significa 2^8 = 256 números possíveis, como 1 bit é referencia ao sinal positivo ou negativo, sao possiveis 2^7 = 128 valores possiveis, 2^7 negativos e (2^7)-1 positivos, além do 0(zero)
+-Variáveis de instância, campo, propriedade ou atributo se referem a mesma coisa
+-Variáveis de instância não podem ser marcadas com static por que isso a tornaria uma variavel de classe
+-As variáveis ficam na Pilha/Stack e Heap
+-Variáveis locais primitivas ficam na pilha/stack 
+-Se a variavel for uma referencia a objeto, o objeto propriamente dito ainda será criado no heap
+-Não existe um objeto de pilha, apenas uma variável de pilha
+-Quando se diz "objeto local" se quer dizer "variavel de referencia declarada localmente"
+-Antes de uma variavel local ser usada ela deve ser inicializada com algum valor. Ao contrario das variaveis de instancia, as variaveis locais não recebem valores-padrão
+-Sombreamento é o nome que se dá ao fato de nomear uma variavel local com o mesmo identificador de uma variável de instância
+
+DECLARAÇÃO DE ARRAYS
+-Um array será sempre um objeto do heap
+-Não existe um array primitivo, mas é possivel criar um array de primitivos
+-Ao contrario de uma Collection, um array não pode se contrair ou expandir dinamicamente
+-Declaração: int[] arrayInt ou int arrayInt[] ou int [] arrayInt ou int arrayInt []
+-Array multidimencional String [] [] [] arrayString
+-Essa declaração também é valida, mas menos recomendado: String [] arrayString [];
+-Declaracao errada de array: int [5] arrayInt;
+-Nunca é válido incluir o tamanho do array na sua declaração. A JVM não aloca espaço até que você de fato instancie o objeto array
+
+VARIÁVEIS FINAL
+-Uma variável final primitiva marcada com final, não pode receber outro valor depois da inicialização
+-Uma variável de referência marcada com final não pode ser reatribuida a outro objeto, mas os objetos dentro dele podem ser modificados
+-Não existe objetos final, apenas referências final
+
+VARIÁVEIS TRANSIENT
+-Se marcar uma variável como transient, estará dizendo a JVM para ignorar essa variável quando tentar serializar o objeto que a contém
+
+VARIÁVEIS VOLATILE
+-O modificador volatile só pode ser aplicada a variáveis
+-O modificador volatile diz à JVM que uma thread que acesse a variável deve sempre reconciliar a sua cópia private da variável com a cópia master presente na memória
+
+VARIÁVEIS E MÉTODOS STATIC
+-O modificador static é usado para criar variáveis e métodos que existirão independente de quaisquer instâncias criadas para classe
+-Todas as instâncias compartilham a mesma copia de um metodo ou variavel static
+-O modificador static pode ser usado em: métodos, variáveis, classe interna(desde que nao seja anônima, dentro de método) e blocos de inicialização
+-Um método static não pode acessar diretamente uma variável de instância a partir da classe onde reside, porque ele não tem uma referencia a nenhuma instância particular da classe
+
+DECLARANDO ENUM
+-O enum permite restringir uma variável para ter um de apenas uns poucos valores pré-definidos
+-Não se pode declarar enum dentro de métodos
+-Ponto e vírgula ';' ao final da declaração do enum (fechar de chaves) é opcional
+-A ordem em que os enums são declarados faz diferença, pois o valor de cada enum sabe seu índice ou posição
+-É possivel fazer sobrecarga de construtor em enum
+-Em um enum é possível criar 'corpo de classe específico da constante'. Abre-se um bloco na constante do enum
+
+
+
+
+aula2
+
+2 Object Orientation
+
+
+Desenvolver código que implemente encapsulamento rígido, acoplamento fraco e alta coesão em classes, e descrever benefícios
+
+4 PILARES DA OO
+-Abstração, Herança, Polimorfismo, Encapsulamento
+
+BENEFÍCIOS DO ENCAPSULAMENTO
+-Permitir alterações na implementação sem ser necessário alterar os códigos chamadores
+
+SOBRESCRITA
+-Não é possível sobrescrever um método diminuindo a visibilidade do mesmo. Por exemplo, de public void eat() para protected void eat(). 
+Apenas aumentar o nível de acesso é permitido
+-Os parâmetros devem coincidir, inclusive na mesma ordem
+-O tipo de retorno deve ser o mesmo ou um subtipo (retorno de tipo covariante)
+-O método sobrescritor pode lançar qualquer exceção (de tempo de execução) não-verificada, mesmo que o método sobrescrito não a tenha lançado
+-Não deve lançar exceções verificadas novas nem exceções mais abrangentes, apenas uma exceção que seja um subtipo da exceção declarada
+-Pode escolher não lançar nenhuma exceção
+-Não pode sobrescrever um método marcado com o modficador final
+-Não pode sobrescrever um método marcado com static
+-Se um método não puder ser herdado, então ele não poderá ser sobrescrito
+-Se um método for sobrescrito, mas você usar uma referência polimórfica(do supertipo) para apontar para o objeto do subtipo com o método
+sobrescritor, o compilador assumirá que você está chamando a versão do método do supertipo. Se a versão do supertipo declarar uma exceção verificada, 
+mas o método do subtipo não o fizer, o compilador ainda assim pensará que voce está chamando um  método que declara uma exceção.
+Apenas em tempo de execução a JVM reconhece o tipo polimórfico
+
+SOBRECARGA 
+-Métodos sobrecarregados devem alterar a lista de argumentos
+-Podem alterar o tipo de retorno
+-Podem alterar o modificador de acesso
+-Podem declarar exceções verificadas novas ou mais abrangentes
+
+-O método sobrescrito a chamar é decidido em tempo de execução com base no tipo do objeto instanciado, 
+mas qual versão sobrecarregado do método a chamar é baseado no tipo da referência passada no tempo de compilação
+
+CONVERSÃO DE VARIÁVEL DE REFERÊNCIA OU CASTING
+-É preciso declarar explicitamente a conversão para um tipo mais especifico da árvore de herança
+-Para um tipo mais abrangente na árvore de herança a converção não precisa ser explícita
+-Se a conversão for entre dois objetos da mesma árvore de herança, só é possível saber de falha em tempo de execução
+-Se a conversão for entre objetos que não fazem parte da mesma hierarquia o compilador acusará o erro
+-Para Animal a = new Dog(); a conversão e chamada Dog d = (Dog)a; d.doDogStuff(); é a mesma coisa que (Dog a).doDogStuff();
+
+CONSTRUTORES
+-Todo construtor deve ter, antes de tudo, uma chamada a this() para um construtor sobrecarregado ou a super(), mas essa chamada pode ser inserida pelo compilador
+-Se sua superclasse não tiver um construtor sem argumentos(ou o padrao), então, em sua subclasse você não poderá usar o construtor padrão oferecido pelo compilador
+
+
+MODIFICADOR STATIC
+-Métodos static não podem acessar nenhum membro não static de uma classe
+-Usar um membro static pode ser feito pelo nome da classe + ponto + o membro ou por uma variavel de referencia
+-Métodos static podem ser sobrecarregados e podem ser redefinidos na classe filha. Redefinido e não sobrescrito.
+
+ACOPLAMENTO E COESÃO
+-Acoplamento é o grau em que uma classe conhece outra. Se o único conhecimento que a classe A tem da classe B é o que a classe B expôs 
+através de sua interface, então diz-se das classe A e B que ela têm acoplamento fraco. Do contrário, se A sabe mais do que deveria sobre
+a meneira pela qual B foi implementada, então A e B têm acoplamento forte, e isso é ruim.
+-Coesão é o termo usado para indicar o grau que uma classe tem um único e bem-focado propósito.
+
+
+ 
+
+
+aula3
+
+3 Assignments 
+
+
+PILHA E HEAP (STACK AND HEAP)
+-As variáveis de instâncias e os objetos residem no HEAP
+-As variáveil locais e métodos residem no(a) STACK/PILHA
+
+LITERAIS DE TIPOS PRIMITIVOS
+-Literais decimais são os que usamos normalmente. Ex.: int lenght = 343;
+-Literais octais usam dígitos de 0 a 7 apenas. Em java são representados com 0 a frente do número. Ex.: int six = 06; int seven = 07; int eight = 010; int nine = 011;. Pode usar até 21 dígitos
+-Literais hexadecimais usam dígitos de 0 a 9 e de A a F. Em java são representados com 0x a frente do número. long 0xCafEl, oXcafeL; int 0xfffAA44. Pode-se usar até 16 dígitos
+-Literais de ponto flutuante são definidos como double de 64bits, se quisier atribui-lo a um float 32bits é necessário adicionar um sufixo f ou F ao final do literal
+-Anexar d ou D ao final de um literal double é permitido, entretanto desnecessário, uma vez que esse já é o comportamento padrão
+-O literal booleano é representado apenas pelos valores true e false apenas.
+-O literal de carácter é representado por um único caracter entre aspas simples. Também podem ser rperesentados por pelo seu valor Unicode. Ex.: char c = '@' ou char c = '\u004E'
+-Um carácter é na verdade um simples inteiro de 16 bits sem sinal que tem 65535 valores. Ex.: char c = 864 e 
+-char d = (char) 70000; é necessario a conversão por que 70.000 está fora do intervalo char. Para números negativos também precisa de conversão.
+-Para carcteres que não podem ser digitados como literal se usa um código de escape como: char c = '\"', para aspas e char c = '\\n';
+
+VARIÁVEIS
+-As variáveis são simplismente depósitos de bits com um tipo designado
+-É necessária conversão explícita de um tipo maior para um menor
+-Se usar operador composto (+= , -= , *= e /=) não é preciso casting
+-Variáveis primitivas locais devem ser inicializadas sempre, do contrário o compilador reclamará
+-As variáveis primitivas locais, não necessariamente, devem ser inicializadas na mesma linha onde foram declaradas, mas devem ser inicializadas antes de serem usadas
+-Variáveis de referência locais devem ser inicializadas, nem que seja com o valor null
+-Elementos de array não precisam ser inicializados. Já o array local deve ser inicializado como qualque outro objeto, nem que seja com null
+-Quando uma variavel de referencia é atribuida com um objeto do mesmo tipo, as duas variaveis passam apontar para o mesmo objeto em memória, o que se altera no objeto de uma variavel é refletido na outra
+-Já o objeto String sofre um tratamento especial, uma vez que String é imutável.
+-Por quanto tempo vive uma variável? Do maior para o menor: static, instance, local, block
+
+PASSANDO VARIÁVEIS DE REFERÊNCIA DE OBJETOS
+-Quando passar uma variável de objeto para método, terá que se lembrar que está passando a referência ao objeto e não o próprio objeto
+-Nota: Uma variável de referência contém bits que representam uma maneira de acessar um objeto na memória (no heap)
+-Quando passar uma variavel de referncia para um metodo estará na verdade passando uma cópia dos bits dessa variável, ou seja, uma cópia doa bits que representam como um objetos específico pode ser acessado
+-Então, tanto o método chamador quando o método chamado agora terão cópias idênticas da referência e, portanto, referenciarão exatamento o mesmo objeto(e não uma cópia) na memória.
+-Teoricamente java emprega a passgem de parâmetros por referência, mas técnicamente ela passa o valor da variável, no caso de uma variável de referência a um onjeto, ela passa o padroa de bits que sabe como acessar um objeto especifico no heap
+-O método chamado não pode alterar a variavel do método chamador, por exemplo, não pode reatribuir um novo objeto para a variavel do metodo chamador
+
+PASSANDO VARIÁVEIS PRIMITIVAS
+-Ao contrário das variaveis de referencia, as variaveis primitivas não tem seu valor referenciado alterado, isso por que na verdade elas não referenciam
+nenhum objeto, o que elas tem são um conjunto de bits que representam seu valor, e ao passar parametro para um metodo elas passam uma cópia desse valor
+
+CONSTRUÇÃO DE ARRAYS
+-Na criação do array a JVM precisa saber o tamanho do array para alocar espaço em memória
+-No momento da criação de um array é necessário especificar entre colchetes o tamanho que esse array deverá ter, caso não seja inicializado.
+-Em arrays multidimensionais, apenas o primeiro colchete precisa ser especificado com o tamanho do array.
+-2 tipos de inicialização de arrays existentes: int [] iArray = new int[] {1,2,3}/*array anonumo*/; ou int[] iArray = {1,2,3,4}
+-Não é permitido pelo compilador informar o número de elementos em uma inicialização anônima. int[] iArray = new int[3] {1,2,3}/*não é válido*/
+
+BLOCOS DE INICIALIZACAO
+-Eles rodam quando a classe é carregada pela primeira vez ser for um bloco de inicialização estático ou na criação de qualquer instância caso contrário
+-O código de blocos de inicialização de instância roda logo depois da chamada a super() em um construtor, ou seja, depois que todos superconstrutores tenham rodado
+-É possível ter vários blocos de inicialização
+-A ordem em que são declarados importa, uma vez que executam de cima para baixo no arquivo
+-Blocos de inicialização de instância servem para colocar código que todos os construtores devem compartilhar, evitando assim, código duplicado
+
+>>>>>>>>> Ordem das Chamadas, dado que Horse extends Animal, onde: 
+>>> Animal a = new Horse("Baloubet du Rouet");
+>>> Bloco (1) de inicialização estático de Animal
+>>> Bloco (2) de inicialização estático de Animal
+>>> Bloco (1) de inicialização estático de Horse.
+>>> Bloco (1) de inicialização estático de Horse.
+>>> Bloco (1) de inicialização de instância de Animal
+>>> Bloco (2) de inicialização de instância de Animal
+>>> Construtor de Animal
+>>> Bloco (1) de inicialização de instância de Horse.
+>>> Bloco (2) de inicialização de instância de Horse.
+>>> Contrutor de Horse
+>>> Contrutor de Horse com parâmetro. Baloubet du Rouet
+
+
+CLASSES WRAPPERS
+-Serve para empacotar tipos primitivos em objetos. Assim poderá retornar um tipo primitivo empacotado em um método que retorna Object, ou adicionar tipos primitivos empacotados em Coleções de Object
+-Serve também para fornecer um conjunto de funções utilitárias a tipos primitivos
+-Há uma classe wrapper para cada tipo primitivo
+-Uma vez que um wrapper recebeu um valor ele não pode mais ser alterado. Eles são inalteráveis
+-Todo Wrapper, exceto Character, possui 2 construtores, um que recebe o tipo primitivo e outro que recebe sua representação em String
+-Character recebe em seu construtor apenas um char
+-O wrapper Boolean recebe um boolean ou uma String que pode ser "True" ou "falSe" não fazendo distinção de maiúsculas ou minúsculas
+-O Boolean serve também para fazer teste booleano 'if(new Boolean("trUE"))', pois o Java faz o autoboxing automaticamente do wrapper
+-Todas as classe Wrappers numéricas apresentam 3 métods toString sendo que 2 são static sobrecarregador, um com string e outro com string e o numero da base numerica
+-Os Wrappers Long e Integer permite converter um número da base 10 para outras bases. Integer.toHexString(254); Long.toOctalString(345);
+-É possível usar o operadores de incremento em um Wrapper Integer, por exemplo: Integer x = 1; x++ /*x agora é 2*/
+-Como Wrapper são imutáveis, o que aconteceu é que o compilador, pela técnica de boxing e unboxing, criou outro objeto
+-==, em wrapper, retorna verdadeiro se 2 wrappers tem mesmo valor, porém valor menor que 127, do contrário retorna false
+
+SOBRECARGA COM BOXING E VAR-ARGS
+-Na escolha por um método sobrecarregado com primitivos, o compilador escolhe o método com o menor argumento que seja mais amplo que o parâmetro passado
+-Na escolha por um método sobrecarregado com um wrapper ou primitivo, o compilador escolhe o método com primitivo
+-Na escolha por um método sobrecarregado com varargs ou primitivo, o compilador escolhe o método com primitivo
+-Na escolha por um método sobrecarregado com varargs ou wrapper, o compilador escolhe o método com wrapper
+-A ampliação para métodos sobrecarregados com wrapper não funciona. Por exemplo, passar Integer para um método que recebe Long
+-REGRAS para métodos sobrecarregados que usem ampliação, boxing e var-args:
+A ampliação de primitivos usa o "menor" argumento possível do método que seja maior que o tipo passado: int para long
+Usados individualmente, var-args e boxing são compatíveis com sobrecarga
+Não é possível ampliar de um tipo wrapper para outro (É-UM falha) : INTEGER para LONG
+Não é possível ampliar e depois fazer boxing: Um int não pode se tornar Long
+É possível fazer boxing e depois ampliar(um int se tornar Object, via Integer). 
+É possível combinar var-args com ampliação ou com boxing
+
+COLETA DE LIXO(Gerenciamento Automático da Memória)
+-No Java a coleta de lixo é automática e isso faz com que não seja possível controlar quando ela irá acontecer
+-O coletor de lixo é controlado pela VM. A JVM decide quando executá-lo
+-Um objeto se torna qualificado para a coleta de lixo quando nenhuma thread ativa pode acessá-lo/alcancá-lo
+-Não alcançar um objeto se refera a não existir nenhuma variável de referência que aponte para o objeto em questão
+-A primeira maneira de remover a referência a um objeto é configurar com null a variável de referência que estiver apontando pra ele
+-A segunda maneira de remover a referência a um objeto é desassociar uma variável de referência de um objeto configurando-a para referenciar outro objeto
+-Uma variável local, depois da execução do método, estará disponivel para coleta
+-Um variavel local que é usada para retornar a chamada de um método não estará disponivel para coleta ao fim do método chamado
+-É possível solicitar que a JVM execute a coleta de lixo
+-Para chamar a classe Runtime, que fornece um mecanismo de comunicação direta com a VM, é necessário chamar 'Runtime.getRuntime()' que retorna um singleton
+-Com o singleton de Runtime em mãos, é possivel solicitar a coleta de lixo por meio do método gc()
+-Alternativamente ao Runtime, é possivel chamar o coletor de lixo pela classe System que cujos métos static são capazes de obter o método singleton pra você
+-Para qualquer objeto, finalize() será chamado apenas uma vez pelo coletor de lixo/Garbage Collector
+-finalize() é chamado no máximo uma vez antes da coleta, acontece que na vez que é chamado, finalize() pode salvar o objeto da exclusão, referenciando o objeto 
+em questao para outro objeto, mas na proximaa vez que se tornar apto para o GC, finalize() não será chamado
+
+
+
+aula4
+
+4 Operators
+
+
+OPERADORES
+
+OPERADORES DE ATRIBUIÇÃO COMPOSTOS
+-(*=, /=, +=, -=)
+-x += 2 * 5 é equivalente a x = x + (2 * 5) 
+-Os operandos a direita são sempre colocados entre parenteses para operações com operadores compostos
+-Então x *= 2 + 5 não é igual a x = x * 2 + 5 que dá precedência para a multiplicação, o correto seria igual x = x * (2 + 5)
+
+OPERADORES DE COMPARAÇÃO
+-(<, <=, >, >=, ==, !=)
+-Operadores de comparação sempre resultam em um valor booleano
+
+OPERADOR instanceof
+-Não é possível testar o operador instanceoof para testar duas hierarquias de classes diferentes. A compilação falha
+
+OPERADOR CONDICIONAL ou ternário
+-É possível aninhar varios operadores condicionais
+
+OPERADORES LÓGICOS
+-(&, &&, |, ||, ^, !)
+
+
+aula5
+
+5 Flow Control, Exceptions, and Assertions
+
+
+IF
+-Só suporta valores booleanos
+
+SWITCH
+-O argumento de 'case' deve ser uma constante de tempo de compilação
+-Avalia char, byte, short, int e enum
+-Se o argumento do case for maior que o maior valor possível do valor avaliado pelo switch, o código não irá compilar
+-Não é possível ter mais de uma instrução case com o mesmo valor
+-A instrução default pode aparecer em qualquer ordem
+
+
+LOOP for BÁSICO
+-Dividido em tres partes 'for(/*Inicialização de variáveis*/ ; /*Condição*/ ; /*Iterações*/)'
+-A 1ª parte permite declarar várias variáveis do mesmo tipo, separando-as por vírgula
+-A 2ª parte permite apenas uma condição que retorne um boolean
+-A 3ª parte faz incremento das variaveis, sendo que x++ e ++x tem o mesmo efeito no for, só sao incrementadas apos a execução do conteudo do for
+-for( ; ; ) é um loop infinito
+-Nenhuma das tres partes do for é obrigatoria
+-Na 3ª parte, a expressão de interação, não necessariamente precisa ser de incremente, poderia haver um 'System.out.print("OI a cada loop")'
+
+for APRIMORADO (foreach)
+-Usado para fazer loops através de arrays
+
+INSTRUÇÕES ROTULADAS
+-Um rótulo deve ser colocado logo antes da intrução sento rotulada, e consiste de um identificador válido que termina com 2 pontos (:)
+-Normalmente usado em loops em conjunto com as palavras chave break e continue
+
+
+MANIPULANDO EXCEÇÕES
+-A exceção pode ser de tempo de execução, verificada ou um erro
+-O bloco finally será sempre executado, com exceção ou não
+-Mesmo se houver uma instrução de retorno no try ou no catch, o bloco finally será executado
+-try pode ser combinado com catch(s) e finally, somente com catch(s) ou somente com finally
+-Uma exceção que não for capturada fará com que seu aplicativo pare de funcionar
+-As exceções são sempre uma subclasse de java.lang.Exception que por sua vez é derivada de Throwable e esta estende Object
+-RuntimeException é um subtipo especial de Exception
+-Nas clausulas cacth, os subtipos de exceptions devem aparecer antes dos seus supertipos, caso contrario o compilador irá reclamar
+-As exceções que um método pode lançar devem ser declaradas(a menos que seja subclasse de RuntimeException)
+-Inclusive os métodos que chamam métodos que lançam exceções devem declara-las se não as tratar
+-A lista de exceções lançadas faz parte da interface pública de um método
+-Todas as exceções que não pertecem a RuntimeException serão consideradas "verificadas", porque o compilador fará uma checagem para ter certeza de que você sabe que algo inadequado pode ocorrer
+-Exceções do tipo RuntimeException são ditas não-verificadas
+-Mesmo que uma RuntimeException seja declarada em método, o método chamador não precisará lança-lá ou trata-lá
+-Para criar um Exceção, simplismente crie uma subclasse de Exception
+
+ASSERTIONS
+-Permite testar suposições durante o desenvolvimento
+-As assertivas desaparecem quando o código é compilado para distribuição
+-Por padrão o uso de assertivas vem desabilitado
+-Para ativar as assertivas executa-se o código com o comando 'java -ea <nome-classe>' ou 'java -enableassertions <classe>'
+-Existem 2 sintaxes: Simple e Muito Simples
+-Muito Simples: 'assert(<expressão booleana>)';
+-Simples: 'assert(<expressão booleana>) : <algo que retorne valor>'; Segunda expressão serve para ajudar na depuração do que ocorreu, fundiona como System.out.println("");
+-Se a expressão(primeira) retornar false então java.lang.AssertionError será lançada.
+-Para desativar as assertivas usa-se 'java -da <classe>' ou 'java -disableassertions <classe>'
+-Apesar do padrão ser as assertivas desativadas elas podem ser uteis para a exclusao de assertivas de um pacote ou classes especificas quando a classe porincipal usa assertivas ativadas
+-Switches de linha de comando (Ativação e desativação seletiva)
+Assertivas sem argumento: ativa ou desativa em todas as classes, exceto para classes do sistema
+Assertivas com o nome de um pacote: Ativa ou desativa assertivas no pacote especificasdo e em qualquer pacote abaixo dele na mesma hierarquia de diretórios
+Assertivas com o nome de uma classe: Ativa ou desativa assertiva na classe especificada
+-É possível combinar switches: 'java -ea -da:com.geeks.Foo' ou também 'java -ea -da:com.geeks...'
+-'java -ea -dsa' ativa as assertivas no ambito geral, porém desativando-as nas classes dos sistemas
+-Nunca tente capturar AsserionError com try-catch, não é recomendado substituir uma assertiva por uma exceção
+-Não use assert para validações em métodos publicos, uma vez que as assertivas dependem de ativação 
+-Só use assertivas para validar argumetos de métodos private
+-Uma expressão assertiva deve deixar o programa no mesmo estado em que estava antes da expressão
+
+
+
+
+
+
+
+
+
+
+aula6
+
+6 Strings, I/O, Formatting, and Parsing
+
+
+STRING
+-Nunca pode ser modificado
+-O que é modificado é a variavel de referencia que passa a referenciar outro objeto String
+-A JVM usa um pool de String para fazer um uso mais eficiente da memória
+-Antes de criar um novo objeto String, a JVM verifica no pool de String se ela já existe, caso positivo, atribui mais uma referencia a esse objeto
+-Quando usamos String s = new String("abc") e não String s = "abc", estamos na verdade criando 2 objetos e não 1. Pois além de inserir abc no pool criará um objeto String comum na memória comum
+-String s = "0123456789"; s.substring(5); => '56789' se lê: do índice 5 até o final, sendo que os índices começam com zero(0)
+-String s = "0123456789"; s.substring(5,8); => '567' se lê: do índice 5 até a posição 8(índice 7)
+String s = "[0]0[1]1[2]2[3]3[4]4[5]5[6]6[7]7[8]8[9]9[10]"; s.substring(5,8)
+String s = "01234|567|89"; s.substring(5,8); (posição do cursor)
+                [5] [8]
+
+STRINGBUFFER E STRINGBUILDER
+-Para muitas operações com String é recomendável usar StringBuilder ou StringBuffer para não sobrecarregar o pool de String
+-Esses objetos são capazes de serem alterados repetidamente sem deixar para trás um rastro de objetos String descartados
+-A diferença entre elas é que StringBuilder não é segura em relação a threads, ou seja, seus métodos não são sincronizados
+-Diferentemente dos objetos String, os objetos StringBuilder e StringBuffer podem ser alterados
+
+NAVEGAÇÃO DE ARQUIVOS E E/S(ENTRADA/SAÍDA)
+-File: não é usada para ler ou escrever dados, mas sim para trabalhar em um nível mais alto, criar arquivos vazios, procurar por arquivos, apagar arquivos, criar diretórios e trabalhar com caminhos
+São usados para representar um arquivo, mas não seus dados
+-FileReader: Usada para ler arquivos de caracteres. Seus métodos read() permite ler caracteres isolados, todo stream de caracteres ou um número fixo de caracteres. 
+-BufferedReder: Normalmente encapsula(wrapped) os objetos de nível mais baixo como o FileReader e melhoram desempenho e produtividade com métodos que trabalham melhor com dados
+possui o método readLine() que permite obter a próxima linha de caracteres de um arquivo
+-FileWriter: Usada para escrever em arquivos de caracteres. Usa o método writer()
+-BufferedWritter: Usada para tornar a classe de baixo nível, como FileWriter, mais eficiente e fácil de usar. Possui o método newLine() que facilita a criação automática de separadores de linhas específicos a plataforma
+-PrintWriter: possui os métods format(), printf() e append()
+-Quando você escreve dados em um stream, certa quantidade de dados será armazenada em buffer, e nunca é possível saber com certeza quando a última parte dos dados será realmente enviada.
+O método flush() garante que a última parte dos dados seja de fato escrita no arquivo
+-É imprecindivel a chamada a close() tanto para leitura quanto para escrita, pois esses são recursos preciosos
+
+
+SERIALIAÇÃO
+-Permite salvar um objeto e todas as suas variáveis de instância
+-ObjectOutputStream.writeObject() // serializa e escreve
+-ObjectInputStream.readObject() // lê e deserealiza
+-Ao serializar um objeto, todos os objetos atrelados a ele também serão serializados
+-No entantos todos os objetos, a qual o objeto que será serializado faz referência, devem implementar Serializable
+-O nodificador transient marca uma variável para que ela não seja serializada com o objeto. 
+SERIALIZAÇÃO MANUAL
+-Se não for possível implementar Serializable em uma classe que é referenciada por uma variavel do objeto a ser serializado, java oferece um mecanismo especial:
+Um conjunto de métodos privados que você pode implementar na sua classe que, se presente, setá chamado automaticamente durante a serialização e a deserialização.
+É quase como se os métodos fosse definidos na interface Serializable, exceto pelo fato de que não são!
+Eles fazem parte de um contrato de callback especial que o sistema de serialização lhe oferece, o qual basicamente diz:
+"se você(o programador) tiver um par de métodos que batam com esta exata assuinatura, estes métodos serão chamados durante o processo de serialização/deserialização"
+Os métodos são: 'private void writeObject(ObjectOutputStream os)' e 'private void readObject(ObjectIntputStream in)'
+onde: os.defaultWriteObject(); os.writeInt(varObj.getValor());
+      is.defaultReadObject(); varObj = new MyObject(is.readInt());
+Então: marca-se os a variavel que nao porde ser serializada com transient e implementa-se os métodos acima
+-Pode fazer várias escritas extras, no entanto devem estar na mesma ordem quando forem lidas
+-Se uma subclasse que implementa Serializable estende uma classe que não implemtena Serializable, quando da deserialização, os estados da superclasse não serão restaurados porque nao foram gravados
+-A superclasse que não é serializavel irá rodar seu construtor resetando suas variaveis de instância
+-Ao serializar um conjunto ou um array, todos os elementos devem ser serializáveis
+-Enquanto as interfaces dos conjuntos não são serializáveis, as classes concretas são serializaveis
+-Variaveis estaticas não são serializadas, pois pertencem à classe e não a instância do objeto
+
+DATAS, NÚMEROS E MOEDA
+-java.util.Date, java.util.Calendar, java,text.DateFormat, java.util.Locale, java.text.NumberFormat
+-Date guarda internamente o valor em milisegundos deste 1/1/1970 até a data sendo representada
+-Date tem a maioria de seus métodos depreciados por que não lida bem com localização e internacionalização
+-Calendar é uma classe abstrata e não é possível invocar seu construtor com new
+-Para obter uma instância de Calendar é necessário chamar seu método static Calendar.getInstance()
+-Ao chamar getInstance java te retorna um subclasse concreta de Calendar, não é possível saber com certeza, provavelmente java.util.GregorianCalendar(mas isso não importa)
+-O método roll() de Calendar é semelhante ao método add(), exceto pelo fato de que quando uma parte de um Date é incrementada ou diminuida, partes maiores do Date não serão afetadas
+Ex: A data é 10/11/2011, ao adicionar 5 meses com add 'c.add(c.MONTH,5)' a data ficaria 11/04/2012, mas com c.roll(c.MONTH, 5) a data ficaria 11/04/2011. Ou seja, o ano não se alteraria
+-DateFormat é uma classe abstrata. Seus principais métodos são formtat(), que converte um Date para String em um determinado padrao e parse() que converte uma String para um Date e pode lançar ParseException
+-Locale possui dois construtores: Locale(String lingua) e Locale(String lingua, String país)
+-Tanto NumberFormat quanto DateFormat só podem definir seu Locale no momento da sua criação/instancição
+-Locale tem dois métodos importantes: loc.getDisplayCountry() e loc.getDisplayLanguage() esses métodos são sobrecarredados para receber o locale para que o retorno seja exibido com base nele e não no default da VM
+-NumberFormat é abstrata e para recuperar uma instância é necessário chamar getInstance ou getCurrencyInstance
+-NumberFormat é usada para formatar números e valores monetários
+
+PARSING, TOKENIZAÇÃO E FORMATAÇÃO
+-java.regex.Matcher, java.regex.Pattern, java.util.Scanner e java.util.Formatter
+-regex == (regular expressions /expressões regulares), é uma linguagem dentro da linguagem usada para buscar dados textuais com base em uma expressão
+-Em geral, uma busca regex roda da esquerda para a direita e, depois que um caracter da fonte tenha sido usado em um a ocorrência, ele não pode ser reutilizado
+Ex: fonte = "abababa" e expressão = "aba" só resulta em 2 ocorrências, o 'aba' do meio teve seu 1º a consumido pela primeira ocorrencia, então não foi considerado para achar outra correspondencia
+-regex trabalha com a idéia de metacaracter. 
+Ex: '\d' procura por todas as ocorrências de dígitos numéricos
+Ex: '\s' procura por um espaço em branco
+Ex: '\w' procura por um caracter de palavra(letra, dígito ou underscore)
+-Patterns que procure conjuntos de caracteres ficam entre colchetes e pode ser separado por hífen para representar o interfalo entre eles
+Ex:[abcABC] procura pelas letras a,b,c,A,B ou C em uma fonte
+Ex:[a-fA-F]procura qualquer letra de a até f mínúscula e de A até F maiúscula em uma fonte
+-Padrão regex para procurar por números hexadecimais em uma fonte: "0[xX][0-9a-fA-f]"
+-Regex usa um quantificador para especificar uma mais ocorrencias de um padrao "+"
+Ex: "\\d+" procurar por vários números seguidos, até um caracter que nao seja numero ser encontrado
+-Então a expressão correta para correspondencias de números hexadecimais seria "0[xX](0-9a-fA-F)+"
+-O uso dos parenteses delimita a atuação do quantificador
+-Quantificadores: ('+' uma ou mais ocorrências)('*' zero ou mais ocorrências) ('?' zero ou uma ocorrência)
+-O operador '^' é de negação. Ex: [^abc] procura tudo, exceto a,b e c
+-O metacaracter '.'(ponto) significa: qualquer caracter
+-? é ganancioso; ?? é relutante, para zero ou um
+-* é ganancioso; *? é relutante, para zero ou muitos
+-+ é ganancioso; +? é relutante, para um ou muitos
+-Ganancioso quer dizer que o motor regex olhou em todo o conjunto-fonte de dados para encontrar uma correspondencia mais abrangente
+-O ganancioso procura a correspondencia mais a direita, nem que isso faça engolir outras correspondencias a esquerda
+-Um dos motivos comuns para se usar regex é para realizar operações de busca e substituição. Matcher oferece diversos métodos que realizam essas operações:
+appendReplacement(), appendTail(), replaceAll()
+-Scanner pode ser usada para aplicar expressões regex a dados-fontes
+
+TOKENIZAÇÃO
+-Tokenização é o processo de se pegar grandes pedaços de dados-fontes, dividi-los em pedaços pequenos e armazenar esses pedaços pequenos em variáveis
+-O uso de tokenização se faz útil quando se deve ler o conteudo de um arquivo afim de move-lo para dentro de objetos, arrays ou conjuntos
+-String e Scanner fornecem métodos úteis para tokenização
+-A combinação de Pattern e Matcher nos ajuda a procurar expressões, já a tokenização nos ajuda a formar tokens usando delimitadores que podem ser expressões regex
+-Um String usa o método "abb76tb_lsd".split("\\d") para tokenizar uma String por meio de um regex. Esse método retorna um array de String que são os tokens
+-split() de String é conveniente para pequenas quantidades de dados, uma vez que não permite parar um tokenização em determinado momento por exemplo
+-Para suprir a deficiência de split existe a classe Scanner
+-Scanner podem usar arquivos, tokens e Strings
+-Com Scanner a tokenização é feita dentro de um loop
+-Scanner pode converter seus tokens para os tipos primitivos apropriados
+-O delimitador padrão de Scanner é " " (espaço em branco)
+
+FORMATANDO COM printf() e format()
+-format() e printf() são da classe java.io.PrintStream
+-Um '%' no meio da String que está sendo submentida ao System.out.printf() significa que o que segue é uma formatação
+-printf() : %[arg_index][flags][width][.precision] conversion char, sendo que o que está entre colchetes não é obrigatório
+arg_index: Um número inteiro seguido diretamente por um $, isso indica qual o argumento deverá ser exibido nessa posição
+flags: '-' justifica o argumento a esquerda
+       '+' inclui um sinal (+ ou -) com este argumento
+       '0' preenche os vazios de argumento com zeros
+       ',' usa separadores de agrupamentos específicos do local(ou seja, a vírgula em 123,456)
+       '(' coloca números negativos entre parenteses
+width: Este valor indica o número mínimo de caracteres a serem exibidos
+precision: indica o número de dígitos a serem exibidos depois do ponto decimal
+conversion: o tipo de argumento que você está formatando 
+           b: boolean; c: char; d: integer; f: floating point; s string
+
+
+
+
+aula7
+
+7 Generics and Collections
+
+
+GENÉRICOS E CONJUNTOS
+
+MÉTODO toString()
+Se uma classe não sobrescrever esse método de Object, a saída padrão será o nome da classe seguido de '@' e a representação em hexadecimal não assinalada do código de hashing do objeto
+
+MÉTODOS equals() e hashCode()
+-Quando você tiver que saber realmente se duas referências são idênticas, use '=='
+-Mas quando tiver que saber se os próprios objetos(e não as referências) são iguais, use equals()
+-O método equals deve ser reflexivo, consistente, simétrico e transitivo
+Reflexivo: x.equals(x) tem que ser verdade
+Simétrico: se x.equals(y) é verdade, então y.equals(x) deve ser verdade
+Transitivo: se x.equals(y) é verdade, e y.equals(z) também é, então z.equals(x) é verdade
+Consistente: Múltiplas chamadas para x.equals(y) retornarão o mesmo resultado
+Nulo: se x não é null, então x.equals(null) também é falso
+-Se não sobrescrever o método equals, não poderá usar o objeto como chave em uma tabela de hashing, pois o equals de object usa o operador '==' para comparar instâncias
+Logo, a menos que ainda se tenha uma referencia a um objeto usado como chave em um hashmap, por exemplo, não será possível buscar um valor por essa chave se o método equals não estiver sobrescrito
+-Sempre que sobrescrever equals() deverá também sobrescrever hashCode()
+-Códigos de hashing normalmente são usados para melhorar o desempenho de grande conjunto de dados
+-O código hash não é necessáriamente exclusivo
+-Conjuntos de Hash(HashMap, HashSet) usam o código de hashing para saber onde armazenalo no conjunto, e posteriormente ter sua busca otimizada
+-O hashcode diz qual é o depósito certo, enquanto o equals diz qual é o objeto certo
+-Dois objeto que tem o mesmo código de hashing não necessariamente serão iguais
+-Dois objetos que são iguais devem ter o mesmo código de hashing 
+(para saber onde procurar os objetos, o hash deve ser igual para os dois)
+-A implementação de hashcode deve usar as mesmas variáveis de equals (Isso respeita o contrato de hashcode)
+-Para que um elemento seja localizado em um conjunto de hashing, tanto o objeto pesquisado quanto o existente em um conjunto devem ter valores de
+hashing idênticos e retornar true para o método equals()
+
+CONJUNTOS
+-Set, List e Queue são interfaces que estendem Collection. Map não implementa Collection mas é um conjunto
+-Nenhum classe implementa diretamente Collection
+-Embora as implementações de Map sejam considerados conjuntos, elas não são derivadas de Collection
+-Há diferença entre Collection e Collections. Collection é uma interface e Collections com 's' no final é uma classe utilitária para ser usada com Collection
+-List: permite duplicatas. 
+-Set: não permite duplicatas
+-Map: itens com identificação exclusiva, os valores podem ser iguais aos de outros
+-Queue: itens arranjados na ordem que serão processados
+-Um conjunto pode ser: Ordenado(ordered), Não-Ordenado(unordered), Classificado(sorted), Não-Classificado(unsorted)
+-List: A única coisa que List tem e os outros conjuntos não, são os vários métodos relacionados ao índice
+-List é ordenada através da posição do índice
+-ArrayList: conjunto ordenado por índices mas não é classificado. implementa RandomAccess(interface marcadora). proporciona iteração e acesso aleatório com rapidez. 
+prefira essa lista quando precisar de iteração rápida e não pretende executar muitas inserções e exclusões
+-Vector: implementa RandomAccess(interface marcador). Semelhante a ArrayList, mas seus métods são sincronizados(thread-safe)
+-LinkedList: é ordenado pela posição do índice. os elementos são duplamente encadeados. boa opção para inclusão e exclusão rápida. implementa Queue e List.
+-Set: dá relevância à exclusividade. não permite duplicata. o método equals() determinará se dois objetos são iguais
+-HashSet: é não classificado e não ordenado. usa código de hashing para acesso. use essa implementação quando quiser um conjunto sem duplicatas e não precisar de ordem na iteração
+-LinkedHashSet: é uma versão ordenada de hashset que mantém uma lista duplamente encadeada circular. pode iterar elementos na ordem em que foram inseridos
+-TreeSet: é um conjunto classificado. 
+-Map:identificadoes exclusivos são relevantes
+-HashMap: não-classificado e não ordenado.  necessita de uma boa implementação de hashcode. paermite chaves quanto valores nulos
+-Hashtable: está para HashMap assim como Vector está para ArrayList. É como HashMap mas tem seus métods sincronizados. não permite chaves nem valores nulos
+-LinkedHashSet: mantém a ordem de inserção. mais lenta para inserir e remover, mas itera mais rapidamente
+-TreeMap: conjunto de Map classificado.
+-Queue: Fila do tipo FIFO. LinkedList é do tipo FIFO (First In First Out / Primeiro a Entrar Primeiro a Sair)
+-PriorityQueue: Ao invéz do sistema FIFO de LinkedList, a PriorityQueue monta uma fila com prioridade de entrada / prioridade de saida
+-PriorityQueue usa um comparator, comparable ou classificacao natural dos elementos para definir uma prioridade
+-A partir do Java 5 é possível adicionar tipos primitivos em conjuntos, isso porque o auto-boxing encapsula o tipo primitivo
+-Para classificar uma List a classe do elemento da lista precisa implementar Comparable que tem o método public int compareTo(Object o)
+-A interface Comparator lhe fornece a capacidade de classificar uma dada coleção de uma série de formas diferentes por for meio do método sort sobrecarregado
+-Comparator exige que se implemente o método public int compare(Object o1, Object o2)
+-Arrays e Collections possuem o método sort sobrecarregado para aceitar um comparator além da lista
+-Arrays e Collections fornecem métodos que lhes permitem procurar por um elemeto específico. binarySearch()
+-O método binarySearch() retorna o índice int do elemento sendo procurado. Retorna um int negativo se não encontrar
+-O conjunto ou array deve ser classificado antes de fazer uma busca com binarySearch()
+-Se tentar fazer uma busca em um conjunto ou array que não foi classificado os resultados da busca não serão previsíveis
+-Se classificar uma array ou conjunto com comparator então o binarySearch deve usar o comparator tbm
+-Se o conjunto ou array for classificado com a ordem natural(Comparable) então não é preciso indicar isso ao binarySearch()
+-Existem métodos para converter array em list e vice-versa
+-List e Set possuem o método toArray e Arrays possue o método asList()
+-Quando se usa o método Arrays.asList() o array e o list ficam unidos como se fossem um só. Uma modifcação em um afetará o outro
+-O método toArray tem 2 tipos. Um que retorna um novo  array de object e um que usa o array que você envia para ele como array de destino
+-Sempre que quiser classificar um conjunto, seus elementos deverão ser mutuamente comparáveis
+-Ao usar um TreeMap ou TreeSet os elementos devem ser comparaveis(implementar comparable) já que usa a ordem natural para comparação
+-PriorityQueue ordena seus elementos usando uma  prioridade definida pelo usuário
+-PriorityQueue pode ser ordenada usando um comparator
+-Queue, PriorityQueue e LinkedList possuem métodos peek(), pool() e offer()
+peek() para ver o primeiro item da fila
+poll() para remover o primeiro item da fila(retorna o elemento removido)
+offer() para adicionar um elemento
+-Na ordem natual de uma String espaço em branco vem antes de número que vem antes de letra maiuscula que vem antes de letra minuscula
+
+TIPOS GENÉRICOS
+-É possível misturar código genérico com antigo não-genérico sem problemas
+Por ex.: passar uma lista parametrizada com Integer para um método que recebe uma lista sem parametrização
+Se tentar obter um elemento, fazendo casting dentro desse método, poderá receber um ClassCastException, em tempo de execução, se a conversão não for do tipo
+Se, dentro desse método, adicionar um elemento que não seja do mesmo tipo parametrizado da lista passada, o código compilará e executará sem erros,
+ mas um erro em tempo de execução pode ocorrer ao tentar obter esse elemento de outro tipo
+-O compilador exibe um aviso ao declarar um conjunto sem tipo parametrizado
+-O código genérico serve apenas para o compilador, a JVM não sabe nada sobre genéricos em tempo de execução
+-Por meio de um processo chamado de "apagamento de tipos", o compilador realiza todas as suas verificações no seu código genérico e depois retira as informações de tipos do bytecode da classe
+-Genéricos é uma proteção estritamente de tempo de compilação
+-Polimorfismo não funciona nos genéricos(tipos parametrizados) como funciona com objetos
+Por ex.: Animal a = new Dog(); // OK
+         List<Dog> l = new ArrayList<Dog>(); // OK
+         List<Animal> l = new ArrayList<Dog>(); // ERRO: Genérico não aceita polimorfismo na declaração do tipo parametrizado
+-Um método que receba uma List<Animal> não aceita receber uma List<Dog>. Pode receber um List<Animal> ou ArrayList<Animal>. O tipo parametrizado deve ser o mesmo
+-Em List<Animal> l = new ArrayList<Animal>(); é possivel adicionar a lista objetos do tipo parametrizado ou dos seus subtipos  
+    l.add(new Animal()); // OK
+    l.add(new Dog()); // OK
+    l.add(new Cat()); // OK
+-Um método que recebe um array de Animal(Animal[] animais) permite que seja adicionado qualquer subtipo de Animal, inclusive Animal, no array
+Se for passado um array de Dog(Dog[] dogs) para o método que recebe um array de Animal(Anima[] animais) o código será compilado sem problemas,
+ mas seguindo nesse caso, se o array do método adicionasse um objeto Cat ao array de Animal, mas que na verdade é array de Dog, 
+ o código compilaria sem problemas, mas em tempo de execução lançaria uma exceção "ArrayStoreException"
+ Para genéricos, isso não é permitido: Chamar um método que recebe List<Animal> passando um List<Dog>. Isso por que os genéricos só funcionam em
+ tempo de compilação, logo não existe uma exceção de tempo de execução, como ArrayStoreException, para que os genéricos não permitam adição de um
+ objeto Cat numa List<Animal> mas que na verdade é um List<Dog>. 
+ Logo, os genéricos forçam que o método seja chamado passando apenas o mesmo tipo parametrizado, para garantir que de fato temos uma List<Animal>
+ e não uma List<Dog>, então, poderemos adicionar todos os subtipos de Animal na List<Animal>, com a garantia de que irá executar com sucesso.
+ Em outras palavras, a JVM sabe os tipos dos arrays, mas não sabe os tipos dos conjuntos por causa do apagamento de tipos genéricos para execução.
+-Os genéricos funcionam apenas em tempo de compilação para manter retrocompatibilidade
+-Existe um mecanismo para dizer ao compilador que você pode usar qualquer subtipo genérico do tipo do argumento declarado, porque não irá 
+ colocar nada no conjunto. Esse mecanismo é o conjunto é o coringa <?>
+-O método "void addAnimal(List<? extends Animal> list){}" pode receber uma lista de qualque subtipo de Animal, inclusive Animal, 
+ mas não pode adicionar nada nessa lista.
+-Em, <? extends Animal>, a palavra chave extends no contexto de um coringa representa tanto as subclasses quanto as implementações de interface
+ void foo(List<? extends Serializable> list){} // é válido. Qualquer subtipo de List com genérico de uma classe que implemente Serializable será aceito
+-Há um outro cenário em que se pode usar o coriga e ainda adicionar ao conjunto de uma forma segura - a palavra chave "super"
+ "void addAnimal(List<? super Dog> animals){}" é válido e pode adicionar ao conjunto, no entanto só é possível adicionar objetos Dog e seus subtipos,
+ esse método aceita qualquer subtipo de List com tipo parametrizado Dog ou um de seus super-tipos
+ Para garantir, a lista do método só aceita adicionar elementos que sejam do tipo Dog ou sub-tipo de Dog como um Labrador,
+ Imagine se fosse passado uma List<Dog> e deixasse adicionar um Animal a lista? Nem todo Animal é um Dog, mas todo Dog é um Dog e todo Labrador é um Dog e todo Poodle é um Dog, etc.,
+ por isso é permitido adicionar Dog e qualquer um de seus subtipos com segurança
+-List<?> e List<Object> são diferentes:
+ List<?> permite qualquer tipo enquanto List<Object> permite somente Object (Generics não trabalha com polimorfismo)
+-List<?> e List<? extends Object> dizem a mesma coisa
+-Enquanto uma referência pode ser de um tipo parametrizado abstrato e polimórfico, o próprio objeto parametrizado deve ser de um tipo específico.
+ -List<?> list = new ArrayList<Dog>(); // OK
+ -List<? extends Animal> list = new ArrayList<Dog>(); // OK
+ -List<?> list = new ArrayList<? extends Animal>(); // Erro: tipo parametrizado abstrato com coringa só vale na variavel de refencia, não na criação do objeto
+ -List<? extends Dog> list = new ArrayList<Integer>(); // Erro: Integer não é um subtipo de Dog
+ -List<? super Dog> list = new ArrayList<Animal>(); // OK
+ -List<? super Animal> list = new ArrayList<Dog>(); // Erro: Dog não é um super tipo de Animal
+ -List<Animal> list = new ArrayList<Dog>(); // Erro: Polimorfismo, no tipo parametrizado, sem coringa "?" não funciona
+ -List<Dog> list = new ArrayList<Animal>(); // Erro: Polimorfismo, no tipo parametrizado, sem coringa "?" não funciona, além do que estaria ao contratrio se funcionasse. Nem todo animal é um dog
+ -List<Dog> list = new ArrayList<Dog>(); // OK
+ -List<Animal> list = new ArrayList<Animal>(); // OK
+-DECLARAÇÕES GENÉRICAS
+-Podemos criar uma classe que requeira que alguém passe um tipo quando a declararem ou instanciarem, assim como List<E> faz
+-O <E> é um marcador para o tipo que você passará. 
+ O "E" é apenas uma convenção para conjuntos, E de element.
+ Outra convenção é o "T", para type.
+-Um vez que a interface List está marcada com o tipo E o método add tem a seguinte assinatura: boolean add(E o);
+ Em outras palabras, o que quer que E seja quando você declarar a List, é isso que poderá adicionar a ela no método add()
+-Pose-se usar mais de um tipo parametrizado em uma única definição de classe
+ class TestGeneric<T, X, Key> { T one; X two; Key three; } ... main() { TestGeneric<String, Cat, Long> obj = new TestGeneric<String, Cat, Long>("foo", new Cat(), 1L); }
+-Pode usar uma forma de notação com coringa em uma definição de classe, para especificar um intervalo (chamado de "limites") para o tipo que poderá ser usado para o parâmetoro do tipo
+ public class AnimalHolder<T extends Animal> {T Animal} // use "T" em vez de "?"
+-public class AnimalHolder<T super Dog> {} // Erro: super não é aceito em declarações de classes genéricas
+-É possível difinir um tipo parametrizado em um nível mais detalhado - o do método
+-public <W> void makeArrayList(W w){} // toma um objeto desconhecido e usa um "W" para representar o tipo agora podemos criar o list usando "W"
+ public <W> void makeArrayList(W w){ List<W> list = new ArrayList<W>(); list.add(w);}
+-public <W super Animal> void foo(W w) {} // Erro: super não é aceito em declarações de tipos genéricos em métodos
+ public <W extends Animal> void foo(W w) {} // OK
+-O <W> antes do tipo de retorno define o que é W antes que você o use como um tipo no argumento ou no retorno
+ Você deve declar W dessa forma a não ser que já o tenha especificado na classe
+-O "?" funciona para declaração de uma referência para uma variável ele não funciona para declaração de classes e métodos genéricos
+
+ 
+
+
+
+aula8
+
+8 Inner Classes
+
+
+Usar classes internas quando nos depararmos projetando uma classe na qual descobrimos ser preciso um comportamento
+que pertence a uma classe separada especializada, mas que também terá que estar intimamente associada à classe
+que estivermos projetando 
+
+-Classes internas se dividem em 4 tipos: Comum; Estática; Locais de Método; Anônimas
+-Classe interna estatica, na verdade, não é interna. É chamada de classe aninhada de nível superior
+
+CLASSE INTERNA COMUM
+-Classe interna também é conhecidas como classe aninhada
+-Classe interna e externa mantém um relacionamento especial: a classe interna tem acesso a todos os membros da classe externa, inclusive os private
+-Se quisermos criar uma instância da classe interna, é preciso ter uma instância da classe externa
+-Para criar uma classe interna: new MyOuter().new MyInner();
+-Se MyInner for estanciada dentro de um método não static de MyOuter, então não é necessário uma referendia de MyOuter. Isso fundiona: new MyInner();
+-Se MyInner for estanciada de um método static ou fora de MyOuter é necessário uma referencia a MyOuter: new MyOuter().new MyInner();
+-Para referenciar a instância da própria classe interna, de dentro do código dessa classe, use this
+-Para apontar para a refêrencia "this externa(instância da classe externa)" de dentro da classe interna, use NomeDaClasseExterna.this
+-Como a classe interna comum é um membro da classe externa, os seguintes modificadores podem ser aplicados a ela:
+final, abstract, public, private, protected, static, strictfp
+-protected abstract class MyInner {} é uma declaração válida de classe interna comum se ela estiver detro da classe externa, como se fosse um membro
+
+CLASSE INTERNA LOCAL DE MÉTODO
+-É declarada dentro de um método
+-Sua instanciação deve se dar após sua declaração, dentro do método apenas, onde é visivel
+-Não pode usar as variáveis locais do método, a menos que estas sejam marcadas como final
+-Os únicos modificadores que se pode aplicar a classe interna de método são os mesmos que se pode aplicar as variáveis locais
+-Os único modificadors aplicáveis são final ou abstract
+
+CLASSES INTERNAS ANÔNIMAS
+-Uma classe anonima não aponta para uma instancia de uma classe, mas para uma subclasse anonima (nao nomeada) da classe
+-MyClass c = new MyClass() { void go(){} }; // variavel de instancia
+-Como a classe anonima é um subtipo e a variavel de referencia é o supertipo, só será possivel acessar métodos que foram definidos no supertipo (polimorfismo)
+-Só métodos sobrescritos/implementados serão acessiveis pela variavel de referencia de uma classe anonima de subtipo/interface (Polimorfismo)
+-Classe anônima pode ser passada como parâmetro
+-Bar b = new Bar(); b.doStuff(new Fooable() { void foo(){}; });
+-Não é possivel instanciar uma classe anonima do mesmo tipo da instanciadora. Erro em tempo de execução. ou seja:
+Uma classe não pode instanciar uma classe anonima dela mesma. erro em tempo de execução
+-É possivel criar uma classe anonima a partir de uma classe abstrata ou interface
+
+CLASSES ESTATICAS ANINHADAS
+-Também chamadas de classes internas estaticas ou classes aninahadas de nivel superior
+-Não compartilha o relacionamento especial com a classe externa
+-Como se fosse uma classe não interna, mas dentro do escopo de uma
+-É um membro estatico da classe encapsuladora
+-Pode ser acessada como qualquer outro membro estatico
+-final protected static class MyStaticClass {} // válido
+-
+
+
+
+
+
+aula9
+
+9 Threads
+
+
+THREADS
+-Existe uma thread por pilha de chamadas ou uma pilha de chamadas por thread
+-Quando se trata de threads, há poucas garantias
+-Principais métodos: start(); yield(); sleep(); run();
+-É possível definir e instanciar um thread de 2 maneiras:
+ Estendendo java.lang.Thread
+ Implementadno a interface Runnable
+-Você só pode passar uma instância de Runnable para os vários objetos Thread, de modo que a mesma instância se torne o destino de múltiplos thread.
+-MyThread mt = new MyThread(); é igual para Thread t = new Thread(new MyRunnable()); onde MyThread extends Thread e MyRunnable implements Runnable
+-Os construtores de Thread:
+ Thread(); Thread(Runnable target); Thread(Runnable target, String name); Thread(String name);
+-A classe que implementa Runnable funciona como um alvo para a Thread que o receber. O método run() da classe que implementa Runnable será chamado após o método start() da Thread ser chamado
+-O método isAlive() é a melhor maneira de determinar se um thread foi iniciado, mas não concluiu seu método run()
+-Os estados de uma thread são: novo, executável/habilitado, executando/execução, esperando/bloqueado/suspenso, inativo
+ NOVO: Seu método start() ainda não foi chamado. também considerado inativo
+ EXECUTÁVEL: Entra pela primeira vez nesse estado após o método start() ser chamado. Também entra nesse estado após sair de um estado de bloqueio,
+              espera ou suspensão. Está nesse estado quando está qualificado para ser executado, mas o agendador não o selecionou como o thread a ser processado
+              É considerado ativo quando está nesse estado.
+ EXECUÇÃO: Entra nesse estado quando o agendador o seleciona (no pool de threads executáveis) como processo a ser executado imediatamente
+ ESPERA/BLOQUEIO/SUSPENSÃO: Está ativo, mas não está qualificado para executar. Pode ficar bloqueado esperando por um recurso(IO ou o bloqueio de um objeto)
+                             assim, se tornará executavel quando esse recurso for disponibilizado. Pode ficar suspendo por que seu código de execução informou
+                             para ficar inativo por algum tempo.
+                             Uma thread não informa a outra thread que ela deve ficar bloqueada/suspensa/espera. Dada uma referencia t a uma Thread
+                              e chamar o métod t.sleep ou t.yield(), na verdade estará dizendo que a thread atual fique suspensa, e não a referencia,
+                              uma vez que esses métodos são estáticos (da classe) e não da referência ao objeto.
+                             Um thread bloqueado ainda é considerado ativo
+ INATIVO: Quando seu método run() é concluído
+-Mesmo no estado inativo continua sendo um objeto Thread utilizável, mas não será mais um thread separado de execução
+-Uma vez inativo, um thread não poderá ser ativado novamente, ou seja, seu método start() não pode ser chamado mais de uma vez, 
+ do contrário recberá uma exceção de tempo de execução: IllegalThreadStateException
+-Thread.currentThread().getName(); retorna o nome da Thread atual em execução
+-A execução das Threads é controlada pelo agendador de threads e não há como prever qual thread entrará em execução nem quando entrará em espera
+-No entanto, com o método não estático join() de Thread, é possível que uma thread diga: una a thread atual ao meu final, ela só poderá ser executada depois que eu terminar meu método run()
+-O agendador de threads é a parte da JVM (embora a maioria das JVMs converta as threads Java diretamente em threads do sistema operacional subjacente)
+ que dicide qual thread deve ser executado em algum momento específico, além de tirar threads do estado executável.
+-Métodos da classe java.lang.Thread que podem influenciar o agendamento de threads. (Apenas influenciar, não ditar)
+ public static void sleep(long millis) throws InterruptedException // tem mais uma versão sobrecarregada
+ public static void yeld()
+ public final void join() throws InterruptedException // tem mais uma versão sobrecarregada
+ public final void setPriority(int newPriority)
+-Métodos de java.lang.Object relacionados a thread que toda classe em Java herda
+ public final void wait() InterruptedException // têm 3 versões sobrecarregadas, incluindo essa
+ public final void notify()
+ public final void notifyAll()
+-Thread.sleep(1000L); t.join(); myObject.wait() lançam InterruptedException
+-Só porque o método sleep() de Thread expirou e depois despertou, não significa que retornará ao estado de excução! Lembre-se de que quando
+ um thread é despertado simplesmente retorna ao estado executável!
+-O thread sendo processado terá prioridade igual ou maior do que a prioridade mais alta dos threads do pool. Não confie sua lógica a prioridade de threads
+-t.setPriority(8) defini uma prioridade para uma thread, que geralmente vai de 1 a 10 (onde 10 é a prioridade mais alta)
+ Embora a prioridade padrão seja 5, a classe Thread possui 3 constantes para prioridade:
+   Thread.MIN_PRIORITY [1]; Thread.NORM_PRIORITY [5]; Thread.MAX_PRIORITY [10];
+-O método Thread.yield() deve retornar a thread sendo executado para o estado executável, a fim de permitir que outros threads com a mesma prioridade
+ tenham sua oportunidade de serem executados. Thread.yield() não faz o thread ficar suspenso/bloqueado/espera, no máximo o deixa no estado executável
+
+SINCRONIZANDO CÓDIGO
+-Para realizar uma operação atômica, em um ambiente multi-thread, é necessário sincronizar o código para garantir que um único thread permaneça sendo executado durante toda a operação atômica
+-Entretanto, pode garantir que mesmo se o thread que estiver processando a operação atômica entrar e sair do estado de execução, nenhum outro thread sendo executado possa atuar sobre os mesmos dados
+-Use "synchronized" para proteger o código do método que se precisa proteger
+-public synchronized void foo() {} // OK - protege o método do acesso multi-thread
+-A sincronização funciona com bloqueio e cada objeto possui apenas um bloqueio
+-Quando um thread usar o bloqueio de um objeto, nenhum outro thread poderá acessar qualquer dos métodos sincronizados dessa classe (referentes a esse objeto)
+-Se um thread entrar em suspensão dentro de um método sincronizado, ele mantém os seus bloqueios - não os libera
+-É possível sincronizar um bloco de código em vez de um método
+-"public void foo() { synchronized(this) {} }" ou "public void foo() { synchronized(myObject) {} }"
+-Métodos static podem ser synchronized. Só haverá uma cópia dos dados static que você tentar proteger, portanto, será necessário
+ apenas um bloqueio por classe para a sincronização de métodos estáticos
+-Toda classe carregada em Java possui uma instancia correspondente de java.lang.Class representando essa classe. É essa intância de java.lang.Class cujo
+ bloqueio será usado para proteger métodos static da classe (se eles forem synchorinized)
+-"public static synchronized foo(){}" é semelhante a "public void foo(){synchronized(MyClass.class){}}" onde MyClass.class é um literal de classe
+-Class c = Class.forName("MyClass")  é igual a MyClass.class. Isso diz: Encontre para mim a instancia de Class que represente a classe chamada MyClass
+-Threads que chamam métodos synchronized não static da mesma classe só bloqueiam uns ao outros se forem da mesma instância
+-Threads que chamam métodos static synchronized da mesma classe sempre bloquearão uns aos outros
+-Um método static synchronized e um que seja synchronized não static nunca bloquearão um ao outro. Static bloqueia em uma instância de Class enquando o não static bloqueia na instancia this
+-Não é preciso se preocupar com variáveis locais - cada thread recebe a sua própria cópia de uma variável local
+-Dois threads que executem o mesmo método ao mesmo tempo usarão diferentes cópias das variáveis locais, e não interferiarão um com o outro
+-Para métodos static que acessam campos static que são modificaveis, synchronizar o método resolve porque as threads se bloqueiam
+-Para métodos não static que acessam campos não static que são modificaveis, synchronizar o método resolve porque as threads se bloqueiam
+-Para métodos não static que acessam campos static modificaveis e métodos static que acessam campos não static modificaveis, só synchronizar o método não funcionam, por que eles não se bloqueiam (NAO CAI NO EXAME. MUITO COMPLEXO)
+-Então, apenas acesse campos static modificaveis em metodos static synchronized e campos nao static modificaveis em metodos synchronized nao static  
+-O impasse de threads ocorre quando duas threads diferentes acessam métodos synchronizados diferentes sendo que esses métodos usam recursos um do outro mas estes já estão bloqueados
+ T1 acessou m1 e bloqueou O1; T2 acessou m2 e bloqueou O2; m1 precisa usar O2 mas ele está bloqueado, então espera. m2 precisa usar O1 mas ele está bloqueado, então espera. A espera é infinita.
+-Os métodos, de Object, wait(), notify() e notifyAll() devem ser executado dentro de um contexto sincronizado (obtendo o bloquei do objeto)
+ esses métodos devem ser chamados a partir do objeto que foi bloqueado
+-wait() deve declarar InterruptedException
+-Se chamar wait fora de um contexto sincronizado uma exceção IllegalMonitorStateException. É uma exceção não verificada, portanto, não precisa captura-la explicitamente
+-Quando o método wait() for chamado em um objeto, o thread que estiver executando esse código abrirá mão de seu bloqueio imediatamente
+-Quando notify() for chamado, isso Não significa que o thread abrirá mão de seu bloqueio na mesma hora. Se o thread ainda estiver concluindo o código sincronizado, o bloqueio não será liberado até que ele saia desse código
+-notifyAll() notificará todos os threads, que estiverem esperando pelo objeto que estava bloqueado, que já podem começar a competir pela obtenção do bloqueio do objeto
+-Para evitar que um notify() execute antes do wait(), usa-se um loop while envolvendo wait() para verificar se wait() deve ser chamado
+ A moral da historia é que, quando usa wait(), notify e notifyAll(), quase sempre você deve ter um loop while junto com wait() para
+  verificar uma condição e forçar a continuação da espera até que  a condição seja atendida
+ 
+
+
+aula10
+
+10 Development
+
+
+DESENVOLVIMENTO
+-Se estiver no diretorio src, por exemplo
+javac -d ../classes br/com/teste/MinhaClasse.java
+-Se classes não existir, ocorrerá um erro na compilação, dizendo que não encontrou o diretório
+-Se classes existir os diretorios referente aos pacotes da classe serão criados automaticamente se não existirem
+-java.util.Properties acessa informações persistentes do sistema, como versão do SO, do compilador Java, da JVM, etc..
+-É possível adicionar e obter suas próprias propriedades: ou por linha de comando ou por código
+-Código: Properties p = System.getProperties(); p.setProp("chave","valor");
+-Linha de comando: java -DmyProp=myValue MyClass
+-Método main con var-args é válido
+-cp ou -classpath indica pro compilador ou jvm onde deve procurar por classes
+Ex: -cp /dirA:dirB/dirC. (o '/' antes de tudo indica que deve procurar a partir da raíz)(o ponto no final diz que deve procurar no diretorios antecessores tbm)
+-Criar um jar: $> jar -cf MyJar.jar directory
+-Examinar o conteúdo de um Jar: $> jar -tf MyJar.jar
+-Usando um jar no classpath para compilar uma classe externa: $> javac -cp dir/MyJar.jar MyClass.java
+-Se: java -cp dir/MyJar.jar;. MyClass só se for no  diretorio de MyClass (nao da para usar -cp jar.jar para executar uma classe de fora do diretorio dessa classe)
+-Se: java -cp dir/MyJar.jar;. MyClass (deve usar . para achar MyClass)
+-jre/lib/ext: qualquer jar jogado dentro desse diretorio da instalação java fará com que o java ou javac dispense a instrução -cp para procurar por essas classes
+-Ao usar classpath para procurar em toda uma estrutura de diretporios o -cp deve apontar para o super-diretorio do diretorio raíz
+-import static java.lang.System.out; ==> out.println();
+-O "." em conjunto -cp indica que deve procurar por classes de dependencia no diretorio onde está a classe a ser compilada/executada
+-Por padrão o java/javac não procura, por classes de dependencia, no diretório atual da classe a ser compilada/executada
+-Para usar -cp ou -classpath o diretorio atual do prompt deve ser no máximo até o super-diretório da estrutura de pacotes das classes
+-Colocar detro do jar os .class a partir do diretorio raiz da estrutura de diretorios
+-O -cp no Win é com '\' e ';', no Linux é '/' e ':'
+-O -DmyProp=myValue só pode ser usado com java, não com javac
+
+
