@@ -3,7 +3,13 @@ package java08;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 class Produto_1 {
 	
@@ -108,6 +114,41 @@ public class JavaStreamsExemplo {
 			//Interface Consumer - percorrer cada elemento da stream e exibi-los no console 
 			.forEach(System.out::println);
 		
+		
+		Map<Integer, String> mapIdName = new HashMap<>();
+		mapIdName.put(12, "Simba");
+		mapIdName.put(10, "Goku");
+		mapIdName.put(4, "Jaspion");
+		mapIdName.put(11, "Pica-Pau");
+		
+		System.out.println(mapIdName.computeIfAbsent(20, s -> "Tarzan"));
+		System.out.println(mapIdName.computeIfAbsent(21, JavaStreamsExemplo::getTarzan));
+		System.out.println(mapIdName.computeIfAbsent(2255, Object::toString));
+		
+		Set<Map.Entry<Integer, String>> setIdName = mapIdName.entrySet();
+		
+		String s = setIdName.stream().filter(e -> e.getKey() >= 10)
+											.sorted((e1, e2) -> e1.getValue().compareToIgnoreCase(e2.getValue()))
+											.map(e -> e.getValue().toUpperCase())
+//											.collect(Collectors.joining(", "))
+											.collect(Collectors.maxBy((e1, e2) -> e1.compareTo(e2))).orElse("Null")
+											//.forEach(System.out::println)
+											;
+		System.out.println(s);
+		
+		Stream<Entry<Integer, String>> stream = setIdName.stream();
+		stream.forEach(System.out::println);
+		try {
+			stream.forEach(System.out::println);			
+		} catch (Exception e) {
+			System.err.println("stream has already been operated upon or closed");
+		}
+		
+	}
+	
+	public static String getTarzan(int value) {
+		System.out.println("someone called getTarzan(int value)...");
+		return "Tarzan-2";
 	}
 
 }

@@ -1,5 +1,6 @@
 package java08;
 
+import java.time.Clock;
 import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.Instant;
@@ -118,8 +119,7 @@ public class DateTimeAPI {
 		
 		/*
 		 * Period
-		 * The Period class represents a quantity of time in terms of years, months and days, 
-		 * and the Duration class represents a quantity of time in terms of seconds and nanoseconds.
+		 * The Period class represents a quantity of time in terms of years, months and days
 		 */
 		
 		LocalDate initialDate = LocalDate.parse("2007-05-10");
@@ -132,8 +132,7 @@ public class DateTimeAPI {
 		
 		/*
 		 * Duration
-		 * The Period class represents a quantity of time in terms of years, months and days, 
-		 * and the Duration class represents a quantity of time in terms of seconds and nanoseconds.
+		 * The Duration class represents a quantity of time in terms of seconds and nanoseconds.
 		 */
 		LocalTime initialTime = LocalTime.of(6, 30, 0);
 		LocalTime finalTime = initialTime.plus(Duration.ofSeconds(30));
@@ -157,6 +156,9 @@ public class DateTimeAPI {
 		Instant.now().getEpochSecond();
 		LocalDateTime.ofEpochSecond(1465817690, 0, ZoneOffset.UTC);
 		
+		System.out.println(new Date() + " - " + LocalDateTime.ofEpochSecond(new Date().getTime() / 1000, 0, ZoneOffset.of("-03:00")));
+		System.out.println(new Date() + " - " + LocalDateTime.ofInstant(new Date().toInstant(), ZoneId.systemDefault()));
+		
 		
 		
 		/*
@@ -165,7 +167,7 @@ public class DateTimeAPI {
 		
 		LocalDateTime localDateTime3 = LocalDateTime.of(2015, Month.JANUARY, 25, 6, 30);
 		String localDateString = localDateTime3.format(DateTimeFormatter.ISO_DATE); //2015-01-25
-		localDateTime3.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+		System.out.println(localDateTime3.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
 
 		String formatLdt = localDateTime3.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withLocale(Locale.UK));
 		System.out.println(formatLdt);
@@ -174,7 +176,8 @@ public class DateTimeAPI {
 		ZonedDateTime zonedDateTime2 = ZonedDateTime.of(localDateTime3, zoneId2);
 		String formatLdt2 = zonedDateTime2.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL).withLocale(Locale.forLanguageTag("pt-BR")));
 		System.out.println(formatLdt2);
-	
+
+		System.out.println(LocalDateTime.now(Clock.system(ZoneId.of("America/Santiago"))));
 		
 		
 	}
