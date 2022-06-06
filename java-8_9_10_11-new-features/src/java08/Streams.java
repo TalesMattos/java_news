@@ -232,6 +232,13 @@ public class Streams {
 		
 	}
 	
+	public void method() {
+    String localVariable = "";
+    Foo foo = parameter -> {
+//        localVariable = parameter; //error
+        return localVariable;
+    };
+	}
 	
 	public Stream<String> streamOf(List<String> list) {
     return list == null || list.isEmpty() ? Stream.empty() : list.stream();
@@ -240,6 +247,11 @@ public class Streams {
 	
 	public void doWork(String element) {
 		System.out.println("doing work for element : " + element + "...");
+	}
+	
+	@FunctionalInterface
+	interface Foo {
+		String method(String s);
 	}
 	
 	
